@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full bg-gray-100 dark:bg-gray-900 px-3">
-    <div class="relative h-16 overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+  <div class="w-full min-w-[600px] bg-gray-100 dark:bg-gray-900 px-3">
+    <div class="relative h-16 overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-xs">
       <div 
         class="ease-in-out"
         :class="isResetting ? 'transition-none' : 'transition-transform duration-700'"

@@ -4,10 +4,10 @@
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
       <!-- Font Awesome CDN 추가 -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-      
+
       <!-- 사이드 바 (고정) -->
       <div class="w-64 min-w-64 h-screen bg-white dark:bg-gray-800 shadow-lg fixed left-0 top-0 flex flex-col">
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex-col text-left pl-9 pt-6">
+        <div class="p-4 flex-col text-left pl-9 pt-6 border-b border-gray-200 dark:border-gray-700">
           <div class="flex items-end gap-2 mb-6">
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white">빵장고</h1>
             <div class="text-xs text-gray-600">{{ currentDate }}</div>
@@ -15,7 +15,7 @@
           <span class="text-xl font-bold text-gray-800 dark:text-white">김빵장</span><span>님</span>
           <p class="text-xs font-bold pb-0.5">좋은 하루 보내세요!</p>
         </div>
-        
+
         <!-- 네비게이션 메뉴 -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <router-link
@@ -24,7 +24,7 @@
             class="flex items-center px-4 py-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             :to="link.path"
             :class="{
-              'font-bold text-amber-600 dark:text-indigo-300': isActive(link.path),
+              'font-bold text-[#BA8E5F] dark:text-indigo-300': isActive(link.path),
               'text-gray-500 dark:text-gray-400': !isActive(link.path),
             }"
           >
@@ -44,13 +44,13 @@
           </button>
         </div>
       </div>
-     
+
       <!-- 오른쪽 내용 (사이드바 너비만큼 왼쪽 마진) -->
       <div class="flex-1 ml-64 min-h-screen overflow-y-auto">
         <div class="w-full">
           <!-- 사고발생 경고창 배너 -->
-          <AlertBanner/>
-          
+          <AlertBanner />
+
           <!-- 메인 컨텐츠 -->
           <div class="p-3">
             <router-view></router-view>
@@ -135,14 +135,15 @@ const logout = () => {
 </script>
 
 <style scoped>
-@media (max-width: 768px) {
+
+/* @media (max-width: 768px) {
   .fixed {
     position: relative;
     width: 100%;
     height: auto;
-  }
-  .ml-64 {
+  } */
+  /* .ml-64 {
     margin-left: 0;
   }
-}
+} */
 </style>
