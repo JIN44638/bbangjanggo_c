@@ -1,9 +1,10 @@
 <template>
-  <div class="pb-[80px]">
+  <div class="h-full overflow-y-auto pb-[20px]">
+    <!-- pb-[80px]를 pb-[20px]로 줄임 (이미 하단 메뉴가 분리되어 있으므로) -->
     <!-- Font Awesome CDN 추가 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- 알림 -->
-    <div class="flex gap-2 items-center rounded-md bg-gray-200 py-1 px-3 m-[20px]">
+    <div class="flex gap-2 items-center rounded-md bg-gray-100 p-3 m-[20px]">
       <i class="fa-solid fa-bullhorn text-red-600"></i>
       <!-- 알림 스와이퍼 -->
       <div>
@@ -32,14 +33,21 @@
         <div :id="'map-' + index" class="w-full h-[250px] rounded-t-lg"></div>
         <!-- 배송 정보 -->
         <div class="bg-[#C89968] text-white p-4 rounded-b-lg">
-          <div class="flex justify-between items-start mb-2">
+          <div class="flex justify-between items-center">
             <div>
-              <p class="text-xs font-[SpokaHanSansNeo]">{{ formatDate(info.date) }} {{ info.time }}</p>
-              <p class="text-sm font-[SpokaHanSansNeo] font-bold mt-1">{{ info.pickUp }} > {{ info.deliver }}</p>
+              <p class="text-xs font-[Cafe24Surround]">{{ formatDate(info.date) }} {{ info.time }}</p>
+              <p class="text-sm font-[Cafe24Surround] mt-1 mb-2">{{ info.pickUp }} · · · · · {{ info.deliver }}</p>
+              <p class="text-sm font-[Cafe24Surround]">
+                (금액) <span class="text-2xl">{{ info.price }}</span>
+              </p>
             </div>
-            <button class="bg-white text-[#50311D] px-4 py-1 rounded-md text-sm font-[SpokaHanSansNeo]">배정</button>
+            <button
+              @click="selectedDelivery"
+              class="cursor-pointer bg-white text-[#50311D] w-[100px] h-[80px] px-4 py-1 rounded-md text-lg font-[Cafe24Surround]"
+            >
+              배정
+            </button>
           </div>
-          <p class="text-lg font-[SpokaHanSansNeo] font-bold">(금액) {{ info.price }}</p>
         </div>
       </div>
     </div>
@@ -69,7 +77,7 @@ const deliverInfo = [
     time: "11:48",
     pickUp: "따끈따끈 베이커리",
     deliver: "반월당역점",
-    price: "4,500원",
+    price: "5,400원",
     pickUpLatLng: { lat: 35.868357343, lng: 128.593475548 },
     deliverLatLng: { lat: 35.864344654, lng: 128.593335108 },
   },
@@ -78,7 +86,7 @@ const deliverInfo = [
     time: "11:52",
     pickUp: "소베",
     deliver: "경대병원역점",
-    price: "4,500원",
+    price: "5,400원",
     pickUpLatLng: { lat: 35.869310354, lng: 128.593244905 },
     deliverLatLng: { lat: 35.863266486, lng: 128.602562449 },
   },
@@ -87,7 +95,7 @@ const deliverInfo = [
     time: "12:01",
     pickUp: "화이트리에",
     deliver: "서대구역점",
-    price: "4,500원",
+    price: "5,400원",
     pickUpLatLng: { lat: 35.854942873, lng: 128.507705037 },
     deliverLatLng: { lat: 35.881483641, lng: 128.540176277 },
   },
@@ -96,7 +104,7 @@ const deliverInfo = [
     time: "12:15",
     pickUp: "공주당",
     deliver: "반월당역점",
-    price: "4,500원",
+    price: "5,400원",
     pickUpLatLng: { lat: 35.867484125, lng: 128.594372877 },
     deliverLatLng: { lat: 35.864344654, lng: 128.593335108 },
   },
@@ -105,7 +113,7 @@ const deliverInfo = [
     time: "13:20",
     pickUp: "르배",
     deliver: "동대구역점",
-    price: "4,500원",
+    price: "5,400원",
     pickUpLatLng: { lat: 35.870394181, lng: 128.633762538 },
     deliverLatLng: { lat: 35.879494199, lng: 128.628741351 },
   },
@@ -126,6 +134,11 @@ const formatDate = (date) => {
 // 배송 선택 함수
 const selectDelivery = (index) => {
   selectedIndex.value = index;
+};
+
+// 배정 버튼 클릭시
+const selectedDelivery = () => {
+  alert("배정이 완료되었습니다.");
 };
 
 // 지도 초기화

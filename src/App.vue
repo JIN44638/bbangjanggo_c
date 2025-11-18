@@ -26,7 +26,7 @@ const route = useRoute()
 
 // 관리자 기사 페이지 레이아웃
 const isSpecialPage = computed(() => {
-  return route.path.startsWith("/admin") || route.path.startsWith("/worker") || route.path.startsWith("/loginworker");
+  return route.path.startsWith("/admin") || route.path.startsWith("/worker") || route.path.startsWith("/loginworker") || route.path.startsWith("/signupworker") || route.path.startsWith("/register");
 });
 </script>
 

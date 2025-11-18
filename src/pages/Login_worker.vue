@@ -2,7 +2,7 @@
   <div class="h-screen w-[768px] m-auto">
     <div class="flex flex-col gap-[50px] justify-center items-center h-full">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-      <h3 class="font-[Cafe24Surround] text-[35px] text-center text-[#50311D]">로그인</h3>
+      <h3 class="font-[Cafe24Surround] text-[30px] text-center text-[#50311D]">로그인</h3>
       <!-- 관리자 구분 탭 -->
       <div class="w-[335px] rounded-lg border border-[#50311D] overflow-hidden relative">
         <!-- 슬라이드 배경 -->
@@ -99,12 +99,18 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
+const route = useRoute()
 
 // 탭 상태 관리
 const activeTab = ref("owner"); // 'owner' 또는 'driver'
+
+// 초기 진입 시 query(tab) 확인
+if (route.query.tab === "driver") {
+  activeTab.value = "driver";
+}
 
 const password = ref("");
 const showPassword = ref(false);
