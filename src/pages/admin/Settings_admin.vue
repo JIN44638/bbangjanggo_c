@@ -18,7 +18,7 @@
             <label class="relative inline-flex items-center cursor-pointer ml-4">
               <input type="checkbox" class="sr-only peer" v-model="settings[ntification.key]" />
               <div
-                class="w-11 h-6 bg-amber-800 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                class="w-11 h-6 bg-amber-800 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
               </div>
             </label>
           </div>
@@ -39,7 +39,7 @@
             <label class="relative inline-flex items-center cursor-pointer ml-4">
               <input type="checkbox" v-model="settings.autoSave" class="sr-only peer" />
               <div
-                class="w-11 h-6 bg-amber-800 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
               </div>
             </label>
           </div>
@@ -103,7 +103,7 @@
             <label class="relative inline-flex items-center cursor-pointer ml-4">
            <input type="checkbox" v-model="settings.dailyReport" class="sr-only peer" />
               <div
-                class="w-11 h-6 bg-amber-800 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
               </div>
             </label>
           </div>
