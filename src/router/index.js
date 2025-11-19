@@ -26,7 +26,6 @@ import Custormer_admin from "@/pages/admin/Custormer_admin.vue";
 import Notice_admin from "@/pages/admin/Notice_admin.vue";
 
 const routes = [
-
   // 메인페이지
   { path: "/", component: Home },
   { path: "/complete", component: Complete },
@@ -46,7 +45,11 @@ const routes = [
   { path: "/register", component: InfoRegister_worker },
 
   // 관리자 페이지
-  { path: "/admin", component: AdminHome, redirect:"admin/dashboard", children:[
+  {
+    path: "/admin",
+    component: AdminHome,
+    redirect: "admin/dashboard",
+    children: [
       { path: "dashboard", component: Dashboard_admin },
       { path: "reservation", component: Reservation_admin },
       { path: "workermanage", component: Worker_admin },
@@ -54,16 +57,21 @@ const routes = [
       { path: "custormer", component: Custormer_admin },
       { path: "notice", component: Notice_admin },
       { path: "settings", component: Settings_admin },
-  ] },
+    ],
+  },
 
   // 기사 페이지
-  { path: "/worker", component: WorkerHome, redirect:"worker/dashboard", children:[
-          { path: "dashboard", component: Dashboard_worker },
-          { path: "notice", component: Notice_worker },
-          { path: "jobs", component: Jobs_worker },
-          { path: "mypage", component: Mypage_worker },
-  ]},
-
+  {
+    path: "/worker",
+    component: WorkerHome,
+    redirect: "worker/dashboard",
+    children: [
+      { path: "dashboard", component: Dashboard_worker },
+      { path: "notice", component: Notice_worker },
+      { path: "jobs", component: Jobs_worker },
+      { path: "mypage", component: Mypage_worker },
+    ],
+  },
 ];
 
 const router = createRouter({

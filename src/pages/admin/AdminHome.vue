@@ -10,10 +10,12 @@
         <div class="p-4 flex-col text-left pl-9 pt-6 border-b border-gray-200 dark:border-gray-700">
           <div class="flex items-end gap-2 mb-6">
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white">빵장고</h1>
-            <div class="text-xs text-gray-600">{{ currentDate }}</div>
+            <!-- 오늘 날짜 빵장고 옆 위치 -->
+            <!-- <div class="text-xs text-gray-600">{{ currentDate }}</div> -->
           </div>
           <span class="text-xl font-bold text-gray-800 dark:text-white">김빵장</span><span>님</span>
-          <p class="text-xs font-bold pb-0.5">좋은 하루 보내세요!</p>
+          <p class="text-xs font-bold py-1">좋은 하루 보내세요!</p>
+          <div class="text-xs text-gray-600">{{ currentDate }}</div>
         </div>
 
         <!-- 네비게이션 메뉴 -->
@@ -46,7 +48,7 @@
       </div>
 
       <!-- 오른쪽 내용 (사이드바 너비만큼 왼쪽 마진) -->
-      <div class="flex-1 ml-64 min-h-screen overflow-y-auto">
+      <div class="flex-1 ml-64 min-h-screen ">
         <div class="w-full">
           <!-- 사고발생 경고창 배너 -->
           <AlertBanner />
@@ -135,14 +137,13 @@ const logout = () => {
 </script>
 
 <style scoped>
-
 /* @media (max-width: 768px) {
   .fixed {
     position: relative;
     width: 100%;
     height: auto;
   } */
-  /* .ml-64 {
+/* .ml-64 {
     margin-left: 0;
   }
 } */

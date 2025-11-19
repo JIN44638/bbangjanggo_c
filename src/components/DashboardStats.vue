@@ -1,6 +1,6 @@
 <!-- DashboardStats.vue -->
 <template>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 min-w-246">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3 min-w-246">
     <!-- 통계 카드 컴포넌트-->
     <div
       v-for="(card, index) in stats"

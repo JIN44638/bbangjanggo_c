@@ -9,7 +9,7 @@
         <div
           v-for="(alert, index) in displayAlerts"
           :key="index"
-          class="h-16 flex items-center justify-center px-6 gap-3 bg-white dark:bg-gray-800"
+          class="h-16 flex items-center  px-10 gap-3 bg-white dark:bg-gray-800"
         >
           <!-- 아이콘 -->
           <div 
