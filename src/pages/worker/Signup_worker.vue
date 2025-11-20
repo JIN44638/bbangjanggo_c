@@ -6,17 +6,28 @@
         <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">이름</h3>
         <input
           type="text"
-          v-model="accountName"
           placeholder="이름 입력하기"
           class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
         />
       </div>
       <div>
         <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">전화번호</h3>
+        <div class="flex gap-2">
+          <input
+            type="text"
+            placeholder="전화번호 입력하기"
+            class="font-[SpokaHanSansNeo] flex-1 border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
+          />
+          <button class="bg-[#50311D] text-[14px] px-3 py-2 rounded-md text-white font-[SpokaHanSansNeo]">
+            인증번호 발송
+          </button>
+        </div>
+      </div>
+      <div>
+        <!-- <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">인증번호</h3> -->
         <input
           type="text"
-          v-model="accountName"
-          placeholder="전화번호 입력하기"
+          placeholder="인증번호 입력하기"
           class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
         />
       </div>
@@ -24,7 +35,6 @@
         <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">아이디</h3>
         <input
           type="text"
-          v-model="accountName"
           placeholder="아이디 입력하기"
           class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
         />
@@ -35,7 +45,6 @@
         </h3>
         <input
           type="text"
-          v-model="accountName"
           placeholder="비밀번호 입력하기"
           class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
         />
@@ -44,15 +53,13 @@
         <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">비밀번호 확인</h3>
         <input
           type="text"
-          v-model="accountName"
-          placeholder="예금주 재입력하기"
+          placeholder="비밀번호 재입력하기"
           class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
         />
       </div>
     </div>
     <button
       type="button"
-      @click="finishSignup"
       class="w-full py-3 bg-[#50311D] text-white font-4 font-[SpokaHanSansNeo] cursor-pointer rounded-md transition-colors duration-200 mt-[50px]"
     >
       완료하기
