@@ -26,7 +26,6 @@
             v-model="statusFilter"
             class="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
             <option value="all">전체 상태</option>
-            <option value="active">번호</option>
             <option value="active">작성일</option>
             <option value="inactive">제목</option>
             <option value="blocked">작성자</option>
@@ -106,7 +105,7 @@
           @click="goToPage(page)"
           :class="[
             currentPage === page
-              ? 'bg-indigo-600 text-white border-indigo-600'
+              ? ' bg-[#50311D] text-white bg- text-[#50311D]'
               : 'border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300',
           ]"
           class="px-3 py-1 border rounded transition-colors">
@@ -183,16 +182,26 @@ function handleInput(event) {
 }
 // 고객목록
 const customers = ref([
-   { id: 1, title: "대구역 보관소 냉장설비 정기 점검 안내드립니다.", author: "홍길동", date: "2025-11-18" },
-        { id: 2, title: "배차 현황 실시간 새로고침 기능이 추가되었습니다.", author: "김철수", date: "2025-11-17" },
-        { id: 3, title: "10월 25일(금) 02:00~04:00 서버 점검 예정", author: "이영희", date: "2025-11-16" },
-        { id: 4, title: "‘입고 알림 자동 전송’ 기능이 새로 추가되었습니다!", author: "박민수", date: "2025-11-15" },
-        { id: 5, title: "10월 1일부터 보관 수수료 정책이 일부 변경됩니다.", author: "최수진", date: "2025-11-14" },
-         { id: 6, title: "신규 기사 교육 일정 안내", author: "홍길동", date: "2025-11-18" },
-        { id: 7, title: "대구역 냉장보관소 정기 점검 소식", author: "김철수", date: "2025-11-17" },
-        { id: 8, title: "대구역 냉장보관소 정기 점검 안내", author: "이영희", date: "2025-11-16" },
-        { id: 9, title: "냉장설비 점검 안내 대구역 보관소", author: "박민수", date: "2025-11-15" },
-        { id: 10, title: "대구역 보관소 냉장설비 정기 점검 안내", author: "최수진", date: "2025-11-14" },
+   { id: 1, title: "대구역 보관소 냉장설비 정기 점검 안내드립니다.", author: "박정은", date: "2025-11-18" },
+        { id: 2, title: "배차 현황 실시간 새로고침 기능이 추가되었습니다.", author: "김민승", date: "2025-11-17" },
+        { id: 3, title: "10월 25일(금) 02:00~04:00 서버 점검 예정", author: "박진성", date: "2025-11-16" },
+        { id: 4, title: "‘입고 알림 자동 전송’ 기능이 새로 추가되었습니다!", author: "김명진", date: "2025-11-15" },
+        { id: 5, title: "10월 1일부터 보관 수수료 정책이 일부 변경됩니다.", author: "김민승", date: "2025-11-14" },
+   { id: 6, title: "대구역 보관소 냉장설비 정기 점검 안내드립니다.", author: "박정은", date: "2025-11-18" },
+        { id: 7, title: "배차 현황 실시간 새로고침 기능이 추가되었습니다.", author: "김민승", date: "2025-11-17" },
+        { id: 8, title: "10월 25일(금) 02:00~04:00 서버 점검 예정", author: "박진성", date: "2025-11-16" },
+        { id: 9, title: "‘입고 알림 자동 전송’ 기능이 새로 추가되었습니다!", author: "김명진", date: "2025-11-15" },
+        { id: 10, title: "10월 1일부터 보관 수수료 정책이 일부 변경됩니다.", author: "김민승", date: "2025-11-14" },
+   { id: 11, title: "대구역 보관소 냉장설비 정기 점검 안내드립니다.", author: "박정은", date: "2025-11-18" },
+        { id: 12, title: "배차 현황 실시간 새로고침 기능이 추가되었습니다.", author: "김민승", date: "2025-11-17" },
+        { id: 13, title: "10월 25일(금) 02:00~04:00 서버 점검 예정", author: "박진성", date: "2025-11-16" },
+        { id: 14, title: "‘입고 알림 자동 전송’ 기능이 새로 추가되었습니다!", author: "김명진", date: "2025-11-15" },
+        { id: 15, title: "10월 1일부터 보관 수수료 정책이 일부 변경됩니다.", author: "김민승", date: "2025-11-14" },
+         { id: 16, title: "신규 기사 교육 일정 안내", author: "박진성", date: "2025-11-18" },
+        { id: 17, title: "대구역 냉장보관소 정기 점검 소식", author: "박정은", date: "2025-11-17" },
+        { id: 18, title: "대구역 냉장보관소 정기 점검 안내", author: "김민승", date: "2025-11-16" },
+        { id: 19, title: "냉장설비 점검 안내 대구역 보관소", author: "김명진", date: "2025-11-15" },
+        { id: 20, title: "대구역 보관소 냉장설비 정기 점검 안내", author: "박진성", date: "2025-11-14" },
 ]);
 // 필터링 관련
 const filteredCustomers = computed(() => {
@@ -219,7 +228,7 @@ const filteredCustomers = computed(() => {
 });
 // 페이네이션
 const currentPage = ref(1);
-const itemsPerPage = ref(5);
+const itemsPerPage = ref(10);
 // 전체 페이지수 계산
 const totalPages = computed(() => {
   return Math.ceil(filteredCustomers.value.length / itemsPerPage.value);

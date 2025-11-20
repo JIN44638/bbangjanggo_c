@@ -1,11 +1,11 @@
 <template>
-  <div class="space-y-6 bg-white-600 text-amber-900 dark:bg-black dark:text-white p-4 rounded">
-    <h1 class="text-3xl font-bold text-white amber mb-8">설정</h1>
+  <div class="space-y-6 bg-white-600 text-gray-900 dark:bg-black amber-900 p-4 rounded">
+    <!-- <h1 class="text-3xl font-bold amber-900 mb-8">관리자 설정</h1> -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
       <!-- 알림 설정 -->
       <div class="bg-white rounded-xl shadow-sm text-amber-900 dark:text-gray-300">
-        <div class=" text p-6 border-b border-amber-800 flex items-center gap-4">
-          <i class="fas fa-bell text-xl text-amber-900"></i>
+        <div class=" text p-6 border-b text-gray-200 flex items-center gap-4">
+          <i class="fas fa-bell text-xl text-gray-400"></i>
           <h2 class="text-xl font-semibold text-gray-900">알림 설정</h2>
         </div>
         <div class="p-6 space-y-6">
@@ -18,7 +18,10 @@
             <label class="relative inline-flex items-center cursor-pointer ml-4">
               <input type="checkbox" class="sr-only peer" v-model="settings[ntification.key]" />
               <div
-                class="w-11 h-6 bg-amber-800 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                class="w-11 h-6 bg-amber-800 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+                 after:bg-white
+                 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
+                 peer-checked:bg-amber-700">
               </div>
             </label>
           </div>
@@ -26,28 +29,31 @@
       </div>
       <!-- 시스템 설정 -->
       <div class="bg-white rounded-xl shadow-sm text-amber-900 dark:text-gray-300">
-        <div class="bg-green-150 p-6 border-b text-amber-90 flex items-center gap-4">
-          <i class="fas fa-cog text-xl text-amber-900"></i>
+        <div class="bg-green-150 p-6 border-b text-gray-200 flex items-center gap-4">
+          <i class="fas fa-cog text-xl  text-gray-400"></i>
           <h2 class="text-xl font-semibold text-gray-900">시스템 설정</h2>
         </div>
         <div class="p-6 space-y-6">
           <div class="flex justify-between items-center">
             <div class="flex-1">
-              <h3 class="text-gray-950 font-medium mb-1">자동 저장</h3>
+              <h3 class="text-gray-800 font-medium mb-1">자동 저장</h3>
               <p class="text-sm text-gray-800">변경사항을 자동으로 저장합니다</p>
             </div>
             <label class="relative inline-flex items-center cursor-pointer ml-4">
               <input type="checkbox" v-model="settings.autoSave" class="sr-only peer" />
               <div
-                class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full
+                 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+                  after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
+                   peer-checked:bg-amber-700">
               </div>
             </label>
           </div>
 
           <div class="border-t pt-6">
-            <h3 class="text-gray-950 font-medium mb-3">세션 타임아웃</h3>
+            <h3 class="text-gray-800 font-medium mb-3">세션 타임아웃</h3>
             <select v-model="settings.sessionTimeout"
-              class="w-full px-4 py-2 border border-amber-900 rounded-lg focus:ring-2 focus:ring-amber-600 focus:border-amber-950">
+              class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-amber-950">
               <option value="15">15분</option>
               <option value="30">30분</option>
               <option value="60">1시간</option>
@@ -58,8 +64,8 @@
         </div>
       </div>
       <!-- 데이터 관리 -->
-      <div class="bg-white rounded-xl shadow-sm text-amber-800 dark:text-gray-700">
-        <div class="white p-6 border-b border-amber-800 flex items-center gap-4">
+      <div class="bg-white rounded-xl shadow-sm text-amber-800 dark:text-gray-200">
+        <div class="white p-6 border-b  text-gray-200 flex items-center gap-4">
           <i class="fas fa-database text-xl text--600"></i>
           <h2 class="text-xl font-semibold text-gray-900">데이터 관리</h2>
         </div>
@@ -81,7 +87,7 @@
               <p class="text-sm text-gray-500">백업된 데이터로 복원합니다</p>
             </div>
             <button @click="restoreData"
-              class="px-5 py-2 bg-amber-900 text-white rounded-lg bg-amber-300 transition-colors font-medium">
+              class="px-5 py-2 bg-amber-900 text-white rounded-lg bg- text-gray-400 transition-colors font-medium">
               <i class="fas fa-upload mr-2"></i>
               복원
             </button>
@@ -90,8 +96,8 @@
       </div>
       <!-- 통계 관리 -->
       <div class="bg-white rounded-xl shadow-sm text-amber-900 dark:text-gray-300">
-        <div class="bg-white-50 p-6 border-b border-amber-800 flex items-center gap-4">
-          <i class="fas fa-chart-bar text-xl text-amber-800"></i>
+        <div class="bg-white-50 p-6 border-b text-gray-200 flex items-center gap-4">
+          <i class="fas fa-chart-bar text-xl text-gray-400"></i>
           <h2 class="text-xl font-semibold text-gray-800">통계 관리</h2>
         </div>
         <div class="p-6 space-y-6">
@@ -103,14 +109,18 @@
             <label class="relative inline-flex items-center cursor-pointer ml-4">
            <input type="checkbox" v-model="settings.dailyReport" class="sr-only peer" />
               <div
-                class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-700 rounded-full peer peer-checked:after:translate-x-full
+                 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+                  after:bg-white
+                   after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
+                 peer-checked:bg-amber-700">
               </div>
             </label>
           </div>
           <div class="border-t pt-6">
             <h3 class="text-gray-800 font-medium mb-3">보고서 형식</h3>
             <select v-model="settings.reportFormat"
-              class="w-full px-4 py-2 border border-amber-00 rounded-lg focus:ring-2 focus:ring-amber-900 focus:border-amber-600">
+              class="w-full px-4 py-2 border border-amber-00 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-amber-700">
               <option value="pdf">PDF</option>
               <option value="excel">Excel</option>
               <option value="csv">CSV</option>
