@@ -7,7 +7,7 @@
       <div class="flex justify-between text-center relative z-10">
         <!-- 소식 탭 -->
         <p
-          class="rounded-l-sm font-[SpokaHanSansNeo] text-4 w-[50%] leading-[40px] cursor-pointer border-r transition-colors duration-300"
+          class="rounded-l-sm font-[SpokaHanSansNeo] text-4 w-[50%] leading-[40px] cursor-pointer transition-colors duration-300"
           :class="activeTab === 'news' ? 'bg-[#50311D] text-white' : 'text-[#50311D]'"
           @click="activeTab = 'news'"
         >
@@ -39,7 +39,7 @@
     </div>
 
     <!-- 알림 (내용 없음) -->
-    <div v-else class="w-full h-[690px] flex flex-col justify-center items-center h-[300px]">
+    <div v-else class="w-full h-[690px] flex flex-col justify-center items-center">
       <i class="text-[30px] text-gray-300 fa-solid fa-bell"></i>
       <p class="text-gray-300 font-[SpokaHanSansNeo] py-2">새로운 알림이 없습니다.</p>
     </div>

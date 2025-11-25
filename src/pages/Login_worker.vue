@@ -84,7 +84,7 @@
           <span>│</span>
           <p>비밀번호 찾기</p>
           <span>│</span>
-          <p>회원가입</p>
+          <p @click="moveToSignUp">회원가입</p>
         </div>
         <!-- 로그인 버튼  -->
         <button
@@ -102,7 +102,7 @@ import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
-const route = useRoute()
+const route = useRoute();
 
 // 탭 상태 관리
 const activeTab = ref("owner"); // 'owner' 또는 'driver'
@@ -125,5 +125,9 @@ const handleLogin = () => {
   } else {
     router.push("/worker/dashboard");
   }
+};
+
+const moveToSignUp = () => {
+  router.push("/signupworker");
 };
 </script>

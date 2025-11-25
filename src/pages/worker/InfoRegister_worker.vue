@@ -29,11 +29,11 @@
 
           <!-- 주소 팝업 -->
           <div>
-            <div id="wrap" ref="wrapRef" class="hidden border w-full h-[300px] m-auto relative">
+            <div id="wrap" ref="wrapRef" class="daum-postcode-wrap hidden border w-full m-auto relative mt-2">
               <img
                 src="//t1.daumcdn.net/postcode/resource/images/close.png"
                 id="btnFoldWrap"
-                class="cursor-pointer absolute right-[0px] top[0px] z-1"
+                class="cursor-pointer absolute right-[0px] top-[0px] z-10"
                 @click="foldDaumPostcode"
                 alt="접기 버튼"
               />
@@ -206,7 +206,7 @@
                 <th
                   class="w-[50%] px-3 py-2 whitespace-nowrap text-[14px] text-white font-[SpokaHanSansNeo] font-normal"
                 >
-                배달료
+                  배달료
                 </th>
               </tr>
             </thead>
@@ -283,11 +283,8 @@ function execDaumPostcode() {
       elementWrap.style.display = "none";
       document.body.scrollTop = currentScroll;
     },
-    onresize(size) {
-      elementWrap.style.height = size.height + "px";
-    },
     width: "100%",
-    height: "100%",
+    height: "450px",
   }).embed(elementWrap);
 
   elementWrap.style.display = "block";
@@ -379,7 +376,7 @@ const finishSignup = () => {
     return;
   }
 
-  alert("회원 가입 완료!");
+  alert("최종적으로 회원가입이 완료 됐습니다!");
   router.push({ path: "/loginworker", query: { tab: "driver" } });
 };
 </script>
@@ -392,5 +389,17 @@ const finishSignup = () => {
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* 다음 우편번호 팝업 고정 높이 */
+.daum-postcode-wrap {
+  height: 450px !important;
+  max-height: 450px !important;
+  overflow: hidden !important;
+}
+
+.daum-postcode-wrap iframe {
+  height: 450px !important;
+  max-height: 450px !important;
 }
 </style>
