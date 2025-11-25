@@ -1,11 +1,12 @@
 <template>
-  <div class="space-y-6 bg-white-600 text-gray-900 dark:bg-black amber-900 p-4 rounded">
+  <div class="space-y-5 bg-white-600 text-gray-900 dark:bg-black amber-900 rounded">
     <!-- <h1 class="text-3xl font-bold amber-900 mb-8">관리자 설정</h1> -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
       <!-- 알림 설정 -->
       <div class="bg-white rounded-xl shadow-sm text-amber-900 dark:text-gray-300">
         <div class=" text p-6 border-b text-gray-200 flex items-center gap-4">
-          <i class="fas fa-bell text-xl text-gray-400"></i>
+          <i class="fas fa-bell text-xl text-gray-400"
+          ></i>
           <h2 class="text-xl font-semibold text-gray-900">알림 설정</h2>
         </div>
         <div class="p-6 space-y-6">
@@ -21,14 +22,14 @@
                 class="w-11 h-6 bg-amber-800 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px]
                  after:bg-white
                  after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
-                 peer-checked:bg-amber-700">
+                 peer-checked:bg-[#A36031]">
               </div>
             </label>
           </div>
         </div>
       </div>
       <!-- 시스템 설정 -->
-      <div class="bg-white rounded-xl shadow-sm text-amber-900 dark:text-gray-300">
+      <div class="bg-white rounded-xl shadow-sm text-gray-200 dark:text-gray-300">
         <div class="bg-green-150 p-6 border-b text-gray-200 flex items-center gap-4">
           <i class="fas fa-cog text-xl  text-gray-400"></i>
           <h2 class="text-xl font-semibold text-gray-900">시스템 설정</h2>
@@ -45,7 +46,7 @@
                 class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full
                  peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px]
                   after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
-                   peer-checked:bg-amber-700">
+                   peer-checked:bg-[#A36031]">
               </div>
             </label>
           </div>
@@ -53,7 +54,7 @@
           <div class="border-t pt-6">
             <h3 class="text-gray-800 font-medium mb-3">세션 타임아웃</h3>
             <select v-model="settings.sessionTimeout"
-              class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-amber-950">
+              class="w-full px-4 py-2 border text-gray-900 border-gray-400 rounded-lg focus:ring-2 focus:ring-amber-800 border-gray-900">
               <option value="15">15분</option>
               <option value="30">30분</option>
               <option value="60">1시간</option>
@@ -64,9 +65,9 @@
         </div>
       </div>
       <!-- 데이터 관리 -->
-      <div class="bg-white rounded-xl shadow-sm text-amber-800 dark:text-gray-200">
+      <div class="bg-white rounded-xl shadow-sm text-[#A36031] dark:text-gray-200">
         <div class="white p-6 border-b  text-gray-200 flex items-center gap-4">
-          <i class="fas fa-database text-xl text--600"></i>
+          <i class="text-gray-400 fas fa-database text-xl text--600 "></i>
           <h2 class="text-xl font-semibold text-gray-900">데이터 관리</h2>
         </div>
         <div class="p-6 space-y-6">
@@ -76,7 +77,7 @@
               <p class="text-sm text-gray-500">모든 데이터를 안전하게 백업합니다</p>
             </div>
             <button @click="backuupData"
-              class="px-5 py-2 bg-amber-800 text-white rounded-lg hover:bg-ambler-700 transition-colors font-medium">
+              class="px-5 py-2 bg-[#50311D] text-white rounded-lg hover:bg-ambler-700 transition-colors font-medium">
               <i class="fas fa-download mr-2"></i>
               백업
             </button>
@@ -87,7 +88,7 @@
               <p class="text-sm text-gray-500">백업된 데이터로 복원합니다</p>
             </div>
             <button @click="restoreData"
-              class="px-5 py-2 bg-amber-900 text-white rounded-lg bg- text-gray-400 transition-colors font-medium">
+              class="px-5 py-2 bg-[#50311D] text-white rounded-lg bg- text-gray-400 transition-colors font-medium">
               <i class="fas fa-upload mr-2"></i>
               복원
             </button>
@@ -113,14 +114,14 @@
                  peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px]
                   after:bg-white
                    after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
-                 peer-checked:bg-amber-700">
+                 peer-checked:bg-[#BA8E5F]">
               </div>
             </label>
           </div>
           <div class="border-t pt-6">
             <h3 class="text-gray-800 font-medium mb-3">보고서 형식</h3>
             <select v-model="settings.reportFormat"
-              class="w-full px-4 py-2 border border-amber-00 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-amber-700">
+              class="w-full px-4 py-2 border text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-900 border-gray-900">
               <option value="pdf">PDF</option>
               <option value="excel">Excel</option>
               <option value="csv">CSV</option>
@@ -131,19 +132,19 @@
     </div>
     <div class="flex justify-end gap-3 mt-8">
       <button @click="resetSettings"
-        class="px-6 py-3 bg-amber-100 text-black rounded-lg hover:bg-amber-600 transition-colors font-medium">
+        class="px-6 py-3 bg-[#BA8E5F]  text-white rounded-lg hover:bg-[#ad8355] transition-colors font-medium">
         <i class="fas fa-undo mr-2"></i>
         초기화
       </button>
       <button @click="saveSettings"
-        class="px-6 py-3 bg-amber-800 text-white rounded-lg hover:bg-amber-600 transition-colors font-medium">
+        class="px-6 py-3 bg-[#50311D] text-white rounded-lg hover:bg-[#9b764f] transition-colors font-medium">
         <i class="fas fa-save mr-2"></i>
         저장
       </button>
     </div>
     <!-- 토스트 메시지 -->
     <div v-if="showToast"
-      class="fixed bottom-8 right-8 px-6 py-3 bg-amber-100 text-amber-950 rounded-lg shadow-lg animate-slide-in flex items-center gap-2 z-50">
+      class="fixed bottom-8 right-8 px-6 py-3 bg-white text-gray-700 rounded-lg shadow-lg animate-slide-in flex items-center gap-2 z-50">
       <i class="fas fa-check-circle"></i>
       <span>설정이 저장되었습니다.</span>
     </div>
