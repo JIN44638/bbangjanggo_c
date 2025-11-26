@@ -3,27 +3,16 @@
     <!-- 전체 레이아웃 -->
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
       <!-- Font Awesome CDN -->
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
       <!-- 사이드바 -->
-      <div
-        class="w-64 min-w-64 h-screen bg-white dark:bg-gray-800 shadow-lg fixed left-0 top-0 flex flex-col"
-      >
+      <div class="w-64 min-w-64 h-screen bg-white dark:bg-gray-800 shadow-lg fixed left-0 top-0 flex flex-col">
         <!-- 상단 정보 -->
-        <div
-          class="p-4 flex-col text-left pl-9 pt-6 border-b border-gray-200 dark:border-gray-700"
-        >
+        <div class="p-4 flex-col text-left pl-9 pt-6 border-b border-gray-200 dark:border-gray-700">
           <div class="flex items-end gap-2 mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-white">
-              빵장고
-            </h1>
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white">빵장고</h1>
           </div>
-          <span class="text-xl font-bold text-gray-800 dark:text-white"
-            >김빵장</span
-          ><span>님</span>
+          <span class="text-xl font-bold text-gray-800 dark:text-white">김빵장</span><span>님</span>
           <p class="text-xs font-bold py-1">좋은 하루 보내세요!</p>
           <div class="text-xs text-gray-600">{{ currentDate }}</div>
         </div>
@@ -36,8 +25,8 @@
             class="flex items-center px-4 py-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             :to="link.path"
             :class="{
-              'font-bold text-[#BA8E5F] dark:text-indigo-300': isActive(link.path),
-              'text-gray-400 dark:text-gray-500': !isActive(link.path)
+              'font-bold text-[#BA8E5F] bg-[#BA8E5F]/20 dark:text-indigo-300': isActive(link.path),
+              'text-gray-400 dark:text-gray-500': !isActive(link.path),
             }"
           >
             <i
@@ -50,23 +39,27 @@
 
           <!-- 긴급 처리 사항 -->
           <div
-            v-if="uncheckedAlerts.length > 0"
-            class="mt-4 p-3 bg-red-100 dark:bg-red-800 rounded-lg border border-red-200 dark:border-red-700"
+            class="mt-4 p-3 rounded-lg border "
+            :class="
+              totalUncheckedCount > 0
+                ? 'bg-red-100 dark:bg-red-800 border-red-200 dark:border-red-700'
+                : 'bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700'
+            "
           >
-            <h3 class="text-red-700 dark:text-red-300 font-bold text-sm mb-2 flex items-center gap-1">
+            <h3
+              :class="totalUncheckedCount > 0 ? 'text-red-700 dark:text-red-300' : 'text-gray-400 dark:text-gray-500'"
+              class="font-bold text-sm mb-2 flex items-center gap-1"
+            >
               <i class="fa-solid fa-triangle-exclamation"></i>
               긴급 처리 사항
             </h3>
-            <ul class="text-xs text-gray-700 dark:text-gray-300 space-y-1.5">
-              <li
-                v-for="(item, idx) in uncheckedAlerts"
-                :key="idx"
-                class="cursor-pointer hover:underline hover:text-red-700 dark:hover:text-red-400 transition-colors"
-                @click="handleAlertClick(item)"
-              >
-                • {{ item.text }}
-              </li>
-            </ul>
+
+            <p
+              :class="totalUncheckedCount > 0 ? 'text-red-700 dark:text-red-300' : 'text-gray-400 dark:text-gray-500'"
+              class="text-xs cursor-pointer"
+            >
+              총 {{ totalUncheckedCount }}건
+            </p>
           </div>
         </nav>
 
@@ -97,11 +90,7 @@
     </div>
 
     <!-- 긴급 처리 모달 -->
-    <EmergencyModal
-      v-model:visible="showEmergencyModal"
-      :alerts="alerts"
-      @allChecked="handleAllChecked"
-    />
+    <EmergencyModal v-model:visible="showEmergencyModal" :alerts="alerts" @allChecked="handleAllChecked" />
   </div>
 </template>
 
@@ -118,7 +107,7 @@ const links = [
   { name: "대시 보드", path: "/admin/dashboard", icon: "fa-solid fa-house" },
   { name: "예약 관리", path: "/admin/reservation", icon: "fa-solid fa-calendar-check" },
   { name: "기사 관리", path: "/admin/workermanage", icon: "fa-solid fa-truck" },
-  { name: "정산관리", path: "/admin/payment", icon: "fa-solid fa-cash-register" },
+  { name: "매출 현황", path: "/admin/payment", icon: "fa-solid fa-cash-register" },
   { name: "고객 문의 관리", path: "/admin/custormer", icon: "fa-solid fa-comment-dots" },
   { name: "공지 및 알림", path: "/admin/notice", icon: "fa-solid fa-bell" },
   { name: "관리자 설정", path: "/admin/settings", icon: "fa-solid fa-gear" },
@@ -143,31 +132,30 @@ const logout = () => router.push("/admin");
 
 // 긴급 처리 사항
 const alerts = ref([
-  { id: 1, text: "냉장보관소 14번 냉장고 고장으로 작동 불가", checked: false },
-  { id: 2, text: "결제 오류", checked: false },
-  { id: 3, text: "문의 답변 대기 5건", checked: false },
-  { id: 4, text: "중요 승인 대기 3건", checked: false },
+  { id: 1, category: "장비 장애", text: "반월당역점 14번 냉장고 고장", count: 1, checked: false },
+  { id: 2, category: "장비 장애", text: "경대병원역점 9번 냉장고 온도 상승", count: 1, checked: false },
+  { id: 3, category: "픽업 지연", text: "픽업 시간 초과 3건", count: 3, checked: false },
+  { id: 4, category: "결제 오류", text: "결제 미완료 예약 2건", count: 2, checked: false },
+  { id: 5, category: "고객센터", text: "문의 답변 대기 5건", count: 5, checked: false },
 ]);
 
-const uncheckedAlerts = computed(() =>
-  alerts.value.filter((a) => !a.checked)
-);
-
+const uncheckedAlerts = computed(() => alerts.value.filter((a) => !a.checked));
+const modalVisible = ref(false);
 const showEmergencyModal = ref(false);
-
-// 페이지 로드 시 미확인 알림이 있으면 모달 표시
+const openEmergencyModal = () => {
+  modalVisible.value = true;
+};
+// 미확인 알림의 총 개수
+const totalUncheckedCount = computed(() => alerts.value.filter((a) => !a.checked).length);
+// 팝업 띄우기
 onMounted(() => {
   if (uncheckedAlerts.value.length > 0) {
     showEmergencyModal.value = true;
   }
 });
 
-const handleAlertClick = (alert) => {
-  showEmergencyModal.value = true;
-};
-
 const handleAllChecked = () => {
-  alerts.value.forEach(a => a.checked = true);
+  alerts.value.forEach((a) => (a.checked = true));
 };
 </script>
 

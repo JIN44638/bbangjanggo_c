@@ -21,7 +21,7 @@
         @click="$emit('goto', page)"
         :class="[
           currentPage === page
-            ? 'bg-[#E67E50] text-white border-[#E67E50]'
+            ? 'bg-[#BA8E5F] text-white border-[#BA8E5F]'
             : 'border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300',
           'px-3 py-1 border rounded'
         ]"

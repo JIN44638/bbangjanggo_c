@@ -283,12 +283,12 @@
       <div class="flex justify-between items-center mb-3">
         <div class="flex items-center gap-2">
           <h2 class="text-lg font-semibold text-gray-800 dark:text-white">고객 문의 관리</h2>
-          <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1">
+          <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1 cursor-pointer">
             <span class="text-[#E67E50] font-bold text-xs">미답변</span>
             <span class="text-[#E67E50] font-black text-xm"> 5</span>
           </div>
         </div>
-        <button @click="goToInquiries" class="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1">
+        <button @click="goToInquiries" class="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 cursor-pointer">
           전체보기
           <span><i class="fa-solid fa-angles-right" style="color: #adafb3"></i></span>
         </button>
@@ -312,12 +312,12 @@
       <div class="flex justify-between items-center mb-4">
         <div class="flex items-center gap-2">
           <h2 class="text-lg font-semibold text-gray-800 dark:text-white">공지사항</h2>
-          <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1">
+          <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1 cursor-pointer">
             <span class="text-[#E67E50] font-bold text-xs">NEW</span>
             <span class="text-[#E67E50] font-black text-xm"> 2</span>
           </div>
         </div>
-        <button @click="goToNotices" class="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1">
+        <button @click="goToNotices" class="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 cursor-pointer">
           전체보기
           <span><i class="fa-solid fa-angles-right" style="color: #adafb3"></i></span>
         </button>

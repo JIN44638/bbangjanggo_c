@@ -3,7 +3,7 @@
   <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xs p-6">
     <div class="flex items-center gap-2 mb-4">
       <h2 class="text-lg font-semibold text-gray-800 dark:text-white">보관소 상태 모니터링</h2>
-      <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1">
+      <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1 cursor-pointer">
         <span class="text-[#E67E50] font-bold text-xs">점검필요</span>
         <span class="text-[#E67E50] font-black text-xm"> 2</span>
       </div>
@@ -15,7 +15,7 @@
         :key="branch.id"
         @click="selectedBranch = branch.id"
         :class="[
-          'px-[15px] py-1.5 text-sm rounded transition-colors whitespace-nowrap',
+          'px-[15px] py-1.5 text-sm rounded transition-colors whitespace-nowrap cursor-pointer',
           selectedBranch === branch.id
             ? 'bg-[#BA8E5F] border-2 border-[#BA8E5F] text-[#ffffff] font-bold'
             : 'border border-gray-300 text-gray-500 hover:bg-gray-100',
