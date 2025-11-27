@@ -42,6 +42,8 @@ const badgeClass = computed(() => {
       return 'bg-orange-100 text-orange-800';
     case '입고완료':
       return 'bg-gray-100 text-gray-800';
+      case '취소':
+      return 'bg-red-100 text-red-800';
     case '미배정':
       return 'text-red-500';
     default:
