@@ -279,40 +279,48 @@
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
     <Monitoring />
     <!-- 고객 문의 관리 -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xs p-6">
-      <div class="flex justify-between items-center mb-3">
-        <div class="flex items-center gap-2">
-          <h2 class="text-lg font-semibold text-gray-800 dark:text-white">고객 문의 관리</h2>
-          <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1 cursor-pointer">
-            <span class="text-[#E67E50] font-bold text-xs">미답변</span>
-            <span class="text-[#E67E50] font-black text-xm"> 5</span>
-          </div>
+   <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xs p-6">
+    <div class="flex justify-between items-center mb-3">
+      <div class="flex items-center gap-2">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">고객 문의 관리</h2>
+        <!-- 미답변 배지 클릭 시 미답변 필터 적용 -->
+        <div 
+          @click="goToUnanswered"
+          class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1 cursor-pointer hover:bg-[#FFF5F0] transition-colors">
+          <span class="text-[#E67E50] font-bold text-xs">미답변</span>
+          <span class="text-[#E67E50] font-black text-xm"> 5</span>
         </div>
-        <button @click="goToInquiries" class="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 cursor-pointer">
-          전체보기
-          <span><i class="fa-solid fa-angles-right" style="color: #adafb3"></i></span>
-        </button>
       </div>
+      <!-- 전체보기 버튼 클릭 시 필터 없이 전체 보기 -->
+      <button 
+        @click="goToInquiries" 
+        class="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 cursor-pointer">
+        전체보기
+        <span><i class="fa-solid fa-angles-right" style="color: #adafb3"></i></span>
+      </button>
+    </div>
 
-      <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300 px-3">
-        <div
-          v-for="inquiry in inquiries"
-          :key="inquiry.id"
-          class="p-2 border-b border-gray-200 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer transition-colors"
-        >
-          <div class="text-sm font-medium text-gray-800 dark:text-white">
-            {{ inquiry.title }}
-          </div>
+    <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300 px-3">
+      <div
+        v-for="inquiry in inquiries"
+        :key="inquiry.id"
+        class="p-2 border-b border-gray-200 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer transition-colors"
+      >
+        <div class="text-sm font-medium text-gray-800 dark:text-white">
+          {{ inquiry.title }}
         </div>
       </div>
     </div>
+  </div>
+  
 
     <!-- 공지사항 -->
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xs p-6">
       <div class="flex justify-between items-center mb-4">
         <div class="flex items-center gap-2">
           <h2 class="text-lg font-semibold text-gray-800 dark:text-white">공지사항</h2>
-          <div class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1 cursor-pointer">
+          <div  @click="goToNotices"  
+          class="border border-[#E67E50] rounded-xl px-3 py-1 flex items-center text-center gap-1 cursor-pointer">
             <span class="text-[#E67E50] font-bold text-xs">NEW</span>
             <span class="text-[#E67E50] font-black text-xm"> 2</span>
           </div>
@@ -349,7 +357,6 @@ import EmergencyModal from "@/components/EmergencyModal.vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
 // 현재 날짜 기준으로 연도, 월, 주차 계산 함수
 const getCurrentDateInfo = () => {
   const now = new Date();
@@ -458,14 +465,26 @@ const notices = [
   // { id: 6, content: "신규 기사 교육 일정 안내" },
 ];
 
-// 페이지 이동 함수
-const goToInquiries = () => {
-  router.push("/admin/custormer");
+// 페이지 이동 함수 수정
+// 미답변 배지 클릭 시 - 미답변 필터 적용
+const goToUnanswered = () => {
+  router.push({ 
+    path: "/admin/custormer",
+    query: { filter: "unanswered" } 
+  });
 };
 
+// 전체보기 클릭 시 - 필터 없이 전체 보기
+const goToInquiries = () => {
+  router.push({ 
+    path: "/admin/custormer"
+    // query 없음 = 필터 없는 전체 보기
+  });
+};
+// 공지사항의 전체보기 클릭시 공지사항으로 이동
 const goToNotices = () => {
   router.push("/admin/notice");
-};
+};;
 // 팝업
 const showEmergencyModal = ref(false);
 

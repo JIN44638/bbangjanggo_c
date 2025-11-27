@@ -228,7 +228,10 @@
 
 <script setup>
 import DashboardStats from "@/components/DashboardStats.vue";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useRoute } from "vue-router"; 
+
+const route = useRoute(); 
 
 // 통계 카드 데이터 (computed로 실제 데이터 기반 계산)
 const inquiryStats = computed(() => {
@@ -454,7 +457,7 @@ const inquiries = ref(generateInquiryData());
 
 // 미답변 문의 목록
 const unansweredInquiries = computed(() => {
-  return inquiries.value.filter((item) => !item.answered).slice(0, 5); // 최대 5개만 표시
+  return inquiries.value.filter((item) => !item.answered).slice(0, 5);
 });
 
 // 검색 핸들러
@@ -607,7 +610,6 @@ const prevPage = () => {
 // 행 클릭 (문의 상세 보기)
 const handleRowClick = (item) => {
   selectedInquiry.value = { ...item };
-  // TODO: 문의 상세 모달 또는 페이지로 이동
   console.log("선택된 문의:", item);
 };
 
@@ -625,7 +627,6 @@ const handleAnswerClick = (item) => {
 const showAllInquiries = () => {
   answeredFilter.value = "unanswered";
   currentPage.value = 1;
-  // 스크롤을 테이블로 이동
   setTimeout(() => {
     const tableElement = document.querySelector(
       ".bg-white.dark\\:bg-gray-800.rounded-lg.shadow-xs"
@@ -635,4 +636,22 @@ const showAllInquiries = () => {
     }
   }, 100);
 };
+
+// 🔥 여기가 추가된 부분입니다! 🔥
+// 대시보드에서 넘어온 쿼리 파라미터를 확인하여 필터 적용
+onMounted(() => {
+  if (route.query.filter === "unanswered") {
+    answeredFilter.value = "unanswered";
+    
+    // 테이블로 스크롤 이동
+    setTimeout(() => {
+      const tableElement = document.querySelector(
+        ".bg-white.dark\\:bg-gray-800.rounded-lg.shadow-xs"
+      );
+      if (tableElement) {
+        tableElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  }
+});
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full min-w-[600px] bg-gray-100 dark:bg-gray-900 px-3">
-    <div class="relative h-16 overflow-hidden bg-white dark:bg-gray-800 rounded-lg shadow-xs">
+  <div class=" bg-gray-100 dark:bg-gray-900 ">
+    <div class="relative h-16 overflow-hidden">
       <div
         class="ease-in-out"
         :class="isResetting ? 'transition-none' : 'transition-transform duration-700'"
@@ -9,7 +9,7 @@
         <div
           v-for="(alert, index) in displayAlerts"
           :key="index"
-          class="h-16 flex items-center px-8 gap-3 bg-white dark:bg-gray-800"
+          class="h-16 flex items-center gap-3 bg-white dark:bg-gray-800"
         >
           <!-- 아이콘 -->
           <div :class="['w-8 h-8 rounded-full flex items-center justify-center', alert.iconBgColor]">

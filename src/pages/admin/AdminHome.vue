@@ -18,50 +18,29 @@
         </div>
 
         <!-- 네비게이션 메뉴 -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link
-            v-for="link in links"
-            :key="link.path"
-            class="flex items-center px-4 py-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            :to="link.path"
-            :class="{
-              'font-bold text-[#BA8E5F] bg-[#BA8E5F]/20 dark:text-indigo-300': isActive(link.path),
-              'text-gray-400 dark:text-gray-500': !isActive(link.path),
-            }"
-          >
-            <i
-              :class="link.icon"
-              class="mr-3 w-5 text-center"
-              :style="{ color: isActive(link.path) ? '#BA8E5F' : '' }"
-            ></i>
-            {{ link.name }}
-          </router-link>
-
-          <!-- 긴급 처리 사항 -->
-          <div
-            class="mt-4 p-3 rounded-lg border "
-            :class="
-              totalUncheckedCount > 0
-                ? 'bg-red-100 dark:bg-red-800 border-red-200 dark:border-red-700'
-                : 'bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700'
-            "
-          >
-            <h3
-              :class="totalUncheckedCount > 0 ? 'text-red-700 dark:text-red-300' : 'text-gray-400 dark:text-gray-500'"
-              class="font-bold text-sm mb-2 flex items-center gap-1"
+        <!-- 사이드바 네비게이션 메뉴 아래쪽에 배치 -->
+        <div class="flex-1 p-4 overflow-y-auto flex flex-col justify-between">
+          <!-- 기존 메뉴 -->
+          <div class="space-y-2">
+            <router-link
+              v-for="link in links"
+              :key="link.path"
+              class="flex items-center px-4 py-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              :to="link.path"
+              :class="{
+                'font-bold text-[#BA8E5F] bg-[#BA8E5F]/20 dark:text-indigo-300': isActive(link.path),
+                'text-gray-400 dark:text-gray-500': !isActive(link.path),
+              }"
             >
-              <i class="fa-solid fa-triangle-exclamation"></i>
-              긴급 처리 사항
-            </h3>
-
-            <p
-              :class="totalUncheckedCount > 0 ? 'text-red-700 dark:text-red-300' : 'text-gray-400 dark:text-gray-500'"
-              class="text-xs cursor-pointer"
-            >
-              총 {{ totalUncheckedCount }}건
-            </p>
+              <i
+                :class="link.icon"
+                class="mr-3 w-5 text-center"
+                :style="{ color: isActive(link.path) ? '#BA8E5F' : '' }"
+              ></i>
+              {{ link.name }}
+            </router-link>
           </div>
-        </nav>
+        </div>
 
         <!-- 로그아웃 버튼 -->
         <div class="p-4 border-t border-gray-200 dark:border-gray-700">
@@ -76,13 +55,54 @@
       </div>
 
       <!-- 오른쪽 메인 영역 -->
-      <div class="flex-1 ml-64 min-h-screen">
-        <div class="w-full">
-          <!-- 사고발생 경고창 배너 -->
-          <AlertBanner />
+      <div class="flex-1 ml-64 min-h-screen ">
+        <div class="w-full bg-red-900">
+          <!-- 기존 상단 sticky 영역 내부 -->
+          <div class="sticky top-0 z-10 bg-gray-100 dark:bg-gray-900 px-1 ">
+            <div class=" flex bg-white dark:bg-gray-800 rounded-lg mx-3 px-8 shadow-xs">
+              <!-- 사고발생 경고창 배너 (80% 너비) -->
+              <div class="flex-1">
+                <AlertBanner />
+              </div>
 
+              <!-- 긴급 처리 사항 (20% 너비) -->
+              <div class="w-1/8 bg-white flex flex-col justify-center">
+                <div class="flex items-center justify-evenly gap-1">
+                  <div class="flex items-center gap-2">
+                    <i
+                      :class="[
+                        'fa-solid fa-triangle-exclamation',
+                        totalUncheckedCount > 0 ? 'text-red-600 dark:text-red-400' : 'text-gray-400 dark:text-gray-500',
+                      ]"
+                    ></i>
+                    <span
+                      :class="
+                        totalUncheckedCount > 0
+                          ? 'text-red-600 dark:text-red-400 font-bold'
+                          : 'text-gray-400 dark:text-gray-500 font-bold'
+                      "
+                      class="whitespace-nowrap"
+                    >
+                      긴급 처리 사항
+                    </span>
+                  </div>
+
+                  <span
+                    :class="
+                      totalUncheckedCount > 0
+                        ? 'text-red-600 text-opacity-80 dark:text-red-400 font-bold text-shadow'
+                        : 'text-gray-400 dark:text-gray-500 font-bold text-shadow'
+                    "
+                    class="whitespace-nowrap"
+                  >
+                    {{ totalUncheckedCount }}건
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- 메인 컨텐츠 -->
-          <div class="p-3">
+          <div class="flex-1 p-4">
             <router-view></router-view>
           </div>
         </div>
@@ -164,5 +184,9 @@ const handleAllChecked = () => {
 i {
   font-size: 1.125rem;
   width: 1.25rem;
+}
+/* 텍스트 그림자 추가 */
+.text-shadow {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 </style>
