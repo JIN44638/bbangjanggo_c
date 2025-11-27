@@ -90,8 +90,10 @@
                 <!-- 배달리스트 상태 버튼 -->
                 <div class="text-sm text-gray-600 space-y-1 flex flex-col items-end gap-[35px]">
                   <!-- 간단한 취소 버튼 (리스트에서도 취소 가능) -->
-                  <button @click="cancelFromList(delivery)" class="mt-1 text-xs text-gray-500 underline">취소하기</button>
-                  
+                  <button @click="cancelFromList(delivery)" class="mt-1 text-xs text-gray-500 underline">
+                    취소하기
+                  </button>
+
                   <button
                     @click="clickStatusChange(delivery)"
                     :disabled="delivery.status === 'completed'"
@@ -130,8 +132,20 @@
           <div v-if="selectedMarkerLoading" class="py-4">
             <div class="inline-flex items-center gap-2">
               <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" class="opacity-25"></circle>
-                <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" class="opacity-75"></path>
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                  fill="none"
+                  class="opacity-25"
+                ></circle>
+                <path
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  class="opacity-75"
+                ></path>
               </svg>
               <span>로딩 중...</span>
             </div>
@@ -238,6 +252,9 @@
 
 <script setup>
 import { ref, computed, onMounted, nextTick, watch } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const showPanel = ref(false);
 const selectedMarker = ref(null);
@@ -482,6 +499,7 @@ const workToggle = () => {
 
 // 🔧 지도 초기화 함수
 const initMap = () => {
+  if (!window.kakao || !window.kakao.maps) return;
   window.kakao.maps.load(() => {
     const mapContainer = document.getElementById("map");
     if (!mapContainer) return;
@@ -585,10 +603,32 @@ const formatTelHref = (phone) => {
   return phone.replace(/\D/g, "");
 };
 
+// route.query.view 변화 감지
+watch(
+  () => route.query.view,
+  async (newView) => {
+    if (newView === "list") {
+      showDeliveryList.value = true;
+      showPanel.value = false;
+    } else {
+      // map이거나 query가 없으면 지도 화면
+      showDeliveryList.value = false;
+      await nextTick();
+      if (!map) {
+        initMap();
+      }
+    }
+  },
+  { immediate: true }
+);
+
 // 🔧 초기 마운트 시 지도 초기화
-onMounted(() => {
-  initMap();
-});
+// onMounted(() => {
+//   // query 확인은 watch에서 처리하므로 지도 초기화만
+//   if (!route.query.view || route.query.view === "map") {
+//     initMap();
+//   }
+// });
 </script>
 
 <style scoped>

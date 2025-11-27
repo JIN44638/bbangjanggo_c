@@ -47,7 +47,11 @@
 </template>
 <script setup>
 import notices from "@/data/notice.json";
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
 
 // 처음 페이지 진입 시 기본 탭 = 소식
 const activeTab = ref("news");
@@ -60,4 +64,32 @@ const getLabelColor = (label) => {
   if (label.includes("NEW") || label.includes("new")) return "text-sky-500";
   return "text-black";
 };
+
+// route.query 변화 감지
+watch(
+  () => route.query.tab,
+  (newTab) => {
+    if (newTab === 'alert') {
+      activeTab.value = 'alert';
+    } else if (newTab === 'news') {
+      activeTab.value = 'news';
+    }
+    // newTab이 없으면 현재 상태 유지
+  },
+  { immediate: true } // 즉시 실행으로 초기값도 처리
+);
+
+// onMounted(() => {
+//   const isRefresh =
+//     performance.navigation?.type === 1 || performance.getEntriesByType?.("navigation")[0]?.type === "reload";
+
+//   if (isRefresh) {
+//     activeTab.value = "news";
+//     router.replace({ path: "/worker/notice", query: {} });
+//   } else {
+//     if (route.query.tab === "alert") {
+//       activeTab.value = "alert";
+//     }
+//   }
+// });
 </script>
