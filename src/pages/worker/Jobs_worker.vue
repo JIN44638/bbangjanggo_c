@@ -90,9 +90,9 @@
                 <!-- 배달리스트 상태 버튼 -->
                 <div class="text-sm text-gray-600 space-y-1 flex flex-col items-end gap-[35px]">
                   <!-- 간단한 취소 버튼 (리스트에서도 취소 가능) -->
-                  <button @click="cancelFromList(delivery)" class="mt-1 text-xs text-gray-500 underline">
-                    취소하기
-                  </button>
+
+                  <button @click="cancelFromList(delivery)" class="mt-1 text-xs text-gray-500 underline">주문취소하기</button>
+                  
 
                   <button
                     @click="clickStatusChange(delivery)"
@@ -169,7 +169,8 @@
                   :href="'tel:' + formatTelHref(selectedMarker.phone)"
                   class="text-gray-800 text-base underline"
                 >
-                  {{ selectedMarker.phone }}
+                <i class="fa-solid fa-phone text-gray-500 text-sm"></i>
+                  {{  selectedMarker.phone }}
                 </a>
                 <span v-else class="text-gray-800 text-base">—</span>
               </div>
