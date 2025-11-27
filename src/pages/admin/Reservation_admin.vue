@@ -100,53 +100,57 @@
           <thead class="bg-gray-50 dark:bg-gray-700">
             <tr>
               <th
-                class="pl-8 pr-3 py-2.5 w-30 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                class="px-8 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 80px"
               >
                 예약번호
               </th>
               <th
-                class="px-3 py-2.5 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 110px"
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 110px"
               >
                 고객명
               </th>
               <th
-                class="px-3 py-2.5 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 110px"
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 110px"
               >
                 연락처
               </th>
               <th
-                class="px-3 py-2.5 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 110px"
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 110px"
               >
                 보관지점
               </th>
               <th
-                class="px-3 py-2.5 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 110px"
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 110px"
               >
                 예약일자
               </th>
               <th
-                class="px-3 py-2.5 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 110px"
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 85px"
               >
                 픽업시간
               </th>
               <th
-                class="px-3 py-2.5 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 110px"
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 85px"
               >
                 상태
               </th>
               <th
-                class="px-3 py-2.5 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 110px"
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 110px"
               >
                 배정기사님
               </th>
-              <th class="px-3 py-2.5 w-32 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase">
+              <th
+                class="px-5 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
+                style="min-width: 110px"
+              >
                 배차상태
               </th>
             </tr>
@@ -163,34 +167,42 @@
               class="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
               @click="handleRowClick(item)"
             >
-              <td class="pl-8 pr-3 py-2.5 text-sm text-gray-900 dark:text-white" style="width: 120px">{{ item.id }}</td>
-              <td class="px-3 py-2.5 text-sm text-gray-900 dark:text-white" style="width: 110px">
+              <td class="px-8 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 80px">
+                {{ item.id }}
+              </td>
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 110px">
                 {{ item.customerName }}
               </td>
-              <td class="px-3 py-2.5 text-sm text-gray-900 dark:text-white" style="width: 110px">{{ item.phone }}</td>
-              <td class="px-3 py-2.5 text-sm text-gray-900 dark:text-white" style="width: 110px">
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 110px">
+                {{ item.phone }}
+              </td>
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 110px">
                 {{ item.storagePoint }}
               </td>
-              <td class="px-3 py-2.5 text-sm text-gray-900 dark:text-white" style="width: 110px">
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 110px">
                 {{ item.reservationDate }}
               </td>
-              <td class="px-3 py-2.5 text-sm text-gray-900 dark:text-white" style="width: 110px">
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 85px">
                 {{ item.pickupTime }}
               </td>
-              <td class="px-3 py-2.5 whitespace-nowrap" style="width: 110px">
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 85px">
                 <Badge :type="item.status" :label="item.status" />
               </td>
-              <td class="px-3 py-2.5 whitespace-nowrap" style="width: 110px">
-                <Badge
-                  :type="item.driver === '미배정' ? '미배정' : 'driver'"
-                  :label="item.driver === '미배정' ? '미배정' : item.driver"
-                />
+              <!-- 배정기사님 -->
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 110px">
+                <Badge :type="item.driver === '미배정' ? '미배정' : 'driver'" :label="item.driver" />
               </td>
-              <td
-                class="px-3 py-2.5 w-32 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase"
-                style="width: 130px"
-              >
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 110px">
                 <Badge :type="item.dispatchStatus" :label="item.dispatchStatus" />
+              </td>
+
+              <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 60px; padding-right: 10px;">
+                <button
+                  @click="openDispatchModal(item)"
+                  class="px-2 py-1 bg-gray-600 hover:bg-gray-700 text-white rounded-md text-xs"
+                >
+                  수정
+                </button>
               </td>
             </tr>
           </tbody>
@@ -300,115 +312,6 @@
         </div>
       </div>
     </div>
-    <!-- 하단 버튼 -->
-    <div class="flex justify-end gap-3 pr-3 dark:bg-gray-700">
-      <button
-        @click="showDispatchModal = true"
-        class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors"
-      >
-        배차수정
-      </button>
-      <button
-        @click="showDriverModal = true"
-        class="px-6 py-2 bg-[#E67E50] hover:bg-[#E67E50] text-white rounded-lg font-medium transition-colors"
-      >
-        기사배정
-      </button>
-    </div>
-    <!-- 기사배정 모달 -->
-    <div
-      v-if="showDriverModal"
-      class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4 z-50"
-    >
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xs max-w-2xl w-full">
-        <div class="p-6 border-b border-gray-200 dark:border-gray-700">
-          <div class="flex justify-between items-center">
-            <h3 class="text-lg font-medium text-gray-900 dark:text-white">기사 배정</h3>
-            <button @click="showDriverModal = false" class="text-gray-400 hover:text-gray-500">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="p-6">
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">예약번호</label>
-              <input
-                v-model="selectedReservation.id"
-                type="text"
-                disabled
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">고객명</label>
-              <input
-                v-model="selectedReservation.customerName"
-                type="text"
-                disabled
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">배정기사</label>
-              <select
-                v-model="selectedReservation.driver"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#A36031] bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              >
-                <option value="미배정">미배정</option>
-                <option value="김지산">김지산</option>
-                <option value="이서윤">이서윤</option>
-                <option value="박민우">박민우</option>
-                <option value="한나리">한나리</option>
-                <option value="윤예린">윤예린</option>
-                <option value="한나연">한나연</option>
-                <option value="정도윤">정도윤</option>
-                <option value="오시우">오시우</option>
-                <option value="권하진">권하진</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">예약일자</label>
-              <input
-                v-model="selectedReservation.reservationDate"
-                type="text"
-                disabled
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">픽업시간</label>
-              <input
-                v-model="selectedReservation.pickupTime"
-                type="text"
-                disabled
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 flex justify-end gap-3">
-          <button
-            @click="showDriverModal = false"
-            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"
-          >
-            취소
-          </button>
-          <button
-            @click="saveDriverAssignment"
-            class="px-4 py-2 bg-[#E67E50] hover:bg-[#A36031] text-white rounded-md text-sm font-medium"
-          >
-            배정
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -447,7 +350,7 @@ const selectedReservation = ref({});
 
 // 페이지네이션
 const currentPage = ref(1);
-const itemsPerPage = 9;
+const itemsPerPage = 10;
 
 // 50명의 더미 데이터 생성
 const generateDummyData = () => {
@@ -511,9 +414,9 @@ const generateDummyData = () => {
 
   const data = [];
   for (let i = 1; i <= 50; i++) {
-    // 2025-11-26 ~ 2025-12-12 랜덤 날짜
+    // 2025-11-26 ~ 2025-12-13 랜덤 날짜
     const startDate = new Date(2025, 10, 26);
-    const endDate = new Date(2025, 11, 12);
+    const endDate = new Date(2025, 11, 13);
     const randomDate = new Date(startDate.getTime() + Math.random() * (endDate - startDate));
     const dispatchStatus = dispatchStatuses[Math.floor(Math.random() * dispatchStatuses.length)];
     const hour = String(10 + Math.floor(i / 5)).padStart(2, "0");
@@ -525,11 +428,11 @@ const generateDummyData = () => {
       phone: `010-${1000 + Math.floor(Math.random() * 9000)}-${1000 + Math.floor(Math.random() * 9000)}`,
       storagePoint: storagePoints[Math.floor(Math.random() * storagePoints.length)],
       reservationDate: randomDate.toISOString().split("T")[0],
-      //pickupTime: `${10 + Math.floor(i / 5)}:${(i * 10) % 60}`,
       pickupTime: `${hour}:${minute}`,
       status: statuses[Math.floor(Math.random() * statuses.length)],
       driver,
       dispatchStatus,
+      isEditing: false, // 새로 추가된 isEditing 속성
     });
   }
   return data;
@@ -626,4 +529,34 @@ const saveDriverAssignment = () => {
   showDriverModal.value = false;
   alert("기사가 배정되었습니다.");
 };
+
+// 기사 수정 후 알림을 위한 상태 변수 추가
+const driverUpdated = ref(false);
+
+// 기사 변경 시 호출되는 함수
+const updateDriver = (item) => {
+  driverUpdated.value = true;
+
+  if (item.driver === "미배정") {
+    item.dispatchStatus = "예약완료";
+    alert("기사가 미배정 상태가 되었습니다.\n다시 배정해주세요.");
+  } else {
+    item.dispatchStatus = "배차완료";
+    alert(`${item.driver} 기사로 수정되었습니다.`);
+  }
+  // 기사명이 변경되면 텍스트로 돌아가도록 설정
+  item.isEditing = false;
+};
+
+// 예약 정보 전체 수정 모달 열기
+const openDispatchModal = (item) => {
+  selectedReservation.value = { ...item };
+  showDispatchModal.value = true;
+};
 </script>
+<style scoped>
+th,
+td {
+  text-align: left;
+}
+</style>

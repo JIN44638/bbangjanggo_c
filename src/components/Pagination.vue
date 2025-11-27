@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center p-4 border-t border-gray-200 dark:border-gray-700">
+  <div class="flex justify-center items-center px-4 py-3 border-t border-gray-200 dark:border-gray-700">
     <div class="flex gap-2">
 
       <!-- 이전 버튼 -->
