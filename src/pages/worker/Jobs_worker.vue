@@ -40,7 +40,8 @@
         </div>
 
         <!-- 배송 카드들 (transition-group: reorder 애니메이션) -->
-        <div class="space-y-4 pt-[140px] px-6">
+        <!-- ✅ 수정: :key에 currentFilter 추가하여 필터 변경 시 깨끗한 전환 -->
+        <div class="space-y-4 pt-[140px] px-6" :key="currentFilter">
           <transition-group name="list" tag="div">
             <div
               v-for="delivery in filteredDeliveryList"
@@ -59,7 +60,11 @@
                 :class="delivery.status === 'completed' ? 'bg-gray-300' : 'bg-[#ba8e5f]'"
               >
                 <p class="text-sm text-gray-50">예약 번호: {{ delivery.reservationNo }}</p>
-                <p class="text-sm text-gray-50">{{ delivery.customerName }} · {{ delivery.phone }}</p>
+                <p class="text-sm text-gray-50">{{ delivery.customerName }} ·                 <a
+                  v-if="selectedMarker?.phone"
+                  :href="'tel:' + formatTelHref(delivery.phone)"
+                  class="text-gray-50 text-sm underline"
+                >{{ delivery.phone }}</a></p>
               </div>
 
               <div class="flex justify-between items-end p-5">
@@ -90,22 +95,21 @@
                 <!-- 배달리스트 상태 버튼 -->
                 <div class="text-sm text-gray-600 space-y-1 flex flex-col items-end gap-[35px]">
                   <!-- 간단한 취소 버튼 (리스트에서도 취소 가능) -->
-
                   <button @click="cancelFromList(delivery)" class="mt-1 text-xs text-gray-500 underline">주문취소하기</button>
                   
-
+                  <!-- ✅ 수정: 상태 버튼에 진행 중 상태 표시 추가 -->
                   <button
                     @click="clickStatusChange(delivery)"
                     :disabled="delivery.status === 'completed'"
                     class="px-4 py-2 text-white text-sm rounded transition-all duration-300"
                     :class="[
-                      getStatusClass(delivery.status),
+                      getStatusClass(delivery.status, bufferingSet.has(delivery.reservationNo)),
                       delivery.status === 'completed'
                         ? 'cursor-not-allowed'
                         : 'cursor-pointer hover:opacity-80 active:scale-95',
                     ]"
                   >
-                    {{ getStatusText(delivery.status) }}
+                    {{ getStatusText(delivery.status, bufferingSet.has(delivery.reservationNo)) }}
                   </button>
                 </div>
               </div>
@@ -163,7 +167,6 @@
               </div>
               <div class="flex items-center">
                 <p class="text-gray-400 text-base w-[120px]">전화번호</p>
-                <!-- tel: 링크 적용 (클릭하면 전화) -->
                 <a
                   v-if="selectedMarker?.phone"
                   :href="'tel:' + formatTelHref(selectedMarker.phone)"
@@ -264,9 +267,12 @@ const selectedMarkerLoading = ref(false);
 let selectionTimeout = null;
 
 const deliveryStatus = ref("pickup");
-const showDeliveryList = ref(false); // 🔧 지도부터 시작하도록 false로 변경
+const showDeliveryList = ref(false);
 let map = null;
 let markers = [];
+
+// ✅ 추가: 마커 원본 이미지 정보를 저장하기 위한 맵
+const markerOriginalImages = new Map();
 
 // --- 탭 정의
 const tabs = [
@@ -340,7 +346,13 @@ const statusText = computed(() => {
   return statusMap[deliveryStatus.value];
 });
 
-const getStatusText = (status) => {
+// ✅ 수정: 진행 중 상태 텍스트 추가
+const getStatusText = (status, isBuffering = false) => {
+  if (isBuffering) {
+    if (status === "pickup") return "픽업 진행중...";
+    if (status === "delivering") return "배송 진행중...";
+  }
+  
   const statusMap = {
     pickup: "픽업 대기중",
     delivering: "배송 중",
@@ -349,7 +361,13 @@ const getStatusText = (status) => {
   return statusMap[status];
 };
 
-const getStatusClass = (status) => {
+// ✅ 수정: 진행 중 상태 색상 추가
+const getStatusClass = (status, isBuffering = false) => {
+  if (isBuffering) {
+    if (status === "pickup") return "bg-[#D88A60]"; // 픽업→배송 중간 톤
+    if (status === "delivering") return "bg-[#4DB8CA]"; // 배송→완료 중간 톤
+  }
+  
   const statusClass = {
     pickup: "bg-[#E67E50]",
     delivering: "bg-[#00ADD8]",
@@ -397,7 +415,7 @@ const clickStatusChange = (delivery) => {
       if (delivery.status === "pickup") delivery.status = "delivering";
       else if (delivery.status === "delivering") delivery.status = "completed";
 
-      updateMarkerOpacityByReservation(delivery.reservationNo);
+      updateMarkerImageByReservation(delivery.reservationNo);
       shiftingSet.value.delete(delivery.reservationNo);
     }, 600);
   }, 2000);
@@ -408,7 +426,13 @@ const cancelFromList = (delivery) => {
   removeMarkerAndDelivery(delivery.reservationNo);
 };
 
+// ✅ 수정: 마커 선택 시 이미지 업데이트 추가
 const selectMarkerWithBuffer = (info, markerInstance) => {
+  // 이전에 선택된 마커가 있으면 원래 이미지로 복원
+  if (selectedMarkerInstance.value && selectedMarkerInstance.value !== markerInstance) {
+    updateMarkerImageByReservation(selectedMarkerInstance.value.reservationNo);
+  }
+
   selectedMarkerLoading.value = true;
   clearTimeout(selectionTimeout);
 
@@ -425,6 +449,9 @@ const selectMarkerWithBuffer = (info, markerInstance) => {
     showPanel.value = true;
     deliveryStatus.value = delivery ? delivery.status : "pickup";
 
+    // ✅ 추가: 선택된 마커 이미지 변경
+    updateMarkerImageByReservation(info.reservationNo, true);
+
     if (map && markerInstance) {
       map.panTo(markerInstance.getPosition());
     }
@@ -437,6 +464,7 @@ const removeMarkerAndDelivery = (reservationNo) => {
     const marker = markers[idx];
     marker.setMap(null);
     markers.splice(idx, 1);
+    markerOriginalImages.delete(reservationNo);
   }
 
   const listIdx = deliveryList.value.findIndex((d) => d.reservationNo === reservationNo);
@@ -460,7 +488,7 @@ const handlePickupComplete = () => {
   const delivery = deliveryList.value.find((d) => d.reservationNo === selectedMarker.value?.reservationNo);
   if (delivery) {
     delivery.status = "delivering";
-    updateMarkerOpacityByReservation(delivery.reservationNo);
+    updateMarkerImageByReservation(delivery.reservationNo, true);
   }
 };
 
@@ -469,7 +497,7 @@ const handleDeliveryComplete = () => {
   const delivery = deliveryList.value.find((d) => d.reservationNo === selectedMarker.value?.reservationNo);
   if (delivery) {
     delivery.status = "completed";
-    updateMarkerOpacityByReservation(delivery.reservationNo);
+    updateMarkerImageByReservation(delivery.reservationNo, true);
   }
 
   setTimeout(() => {
@@ -477,7 +505,12 @@ const handleDeliveryComplete = () => {
   }, 2000);
 };
 
+// ✅ 수정: 패널 닫을 때 마커 이미지 복원
 const handleClose = () => {
+  if (selectedMarkerInstance.value) {
+    updateMarkerImageByReservation(selectedMarkerInstance.value.reservationNo);
+  }
+  
   showPanel.value = false;
   deliveryStatus.value = "pickup";
   selectedMarker.value = null;
@@ -488,14 +521,30 @@ const workToggle = () => {
   showDeliveryList.value = !showDeliveryList.value;
   if (showDeliveryList.value) {
     showPanel.value = false;
+    // 지도 → 리스트 전환 시 선택된 마커 이미지 복원
+    if (selectedMarkerInstance.value) {
+      updateMarkerImageByReservation(selectedMarkerInstance.value.reservationNo);
+      selectedMarkerInstance.value = null;
+    }
   } else {
-    // 🔧 지도로 전환 시 지도가 없으면 초기화
     nextTick(() => {
       if (!map) {
         initMap();
       }
     });
   }
+};
+
+// ✅ 추가: 완료 마커 이미지 매핑 (각 마커별 완료 이미지)
+const getCompleteImageByIndex = (index) => {
+  const completeImages = [
+    "/images/kms/complete_pin (1).png",
+    "/images/kms/complete_pin (2).png",
+    "/images/kms/complete_pin (3).png",
+    "/images/kms/complete_pin (4).png",
+    "/images/kms/complete_pin (5).png",
+  ];
+  return completeImages[index] || completeImages[0];
 };
 
 // 🔧 지도 초기화 함수
@@ -517,36 +566,41 @@ const initMap = () => {
         title: "따끈따끈 베이커리",
         latlng: new kakao.maps.LatLng(35.868508, 128.593771),
         reservationNo: "20251027-0135",
-        imageSrc: "/images/kms/mainpin.png",
+        imageSrc: "/images/pje/deliver_pin1.png",
         imageSize: { width: 44, height: 63 },
+        index: 0,
       },
       {
         title: "공주당",
         latlng: new kakao.maps.LatLng(35.868006, 128.595659),
         reservationNo: "20251027-0136",
-        imageSrc: "/images/pje/deliver_pin1.png",
+        imageSrc: "/images/pje/deliver_pin2.png",
         imageSize: { width: 44, height: 63 },
+        index: 1,
       },
       {
         title: "소베",
         latlng: new kakao.maps.LatLng(35.869458, 128.593245),
         reservationNo: "20251027-0137",
-        imageSrc: "/images/pje/deliver_pin2.png",
+        imageSrc: "/images/pje/deliver_pin3.png",
         imageSize: { width: 44, height: 63 },
+        index: 2,
       },
       {
         title: "네쥬",
         latlng: new kakao.maps.LatLng(35.868691, 128.594742),
         reservationNo: "20251027-0138",
-        imageSrc: "/images/pje/deliver_pin3.png",
+        imageSrc: "/images/pje/deliver_pin4.png",
         imageSize: { width: 44, height: 63 },
+        index: 3,
       },
       {
         title: "윈드윈",
         latlng: new kakao.maps.LatLng(35.867354, 128.584411),
         reservationNo: "20251027-0139",
-        imageSrc: "/images/pje/deliver_pin4.png",
+        imageSrc: "/images/pje/deliver_pin5.png",
         imageSize: { width: 44, height: 63 },
+        index: 4,
       },
     ];
 
@@ -564,12 +618,27 @@ const initMap = () => {
       });
 
       marker.reservationNo = info.reservationNo;
+      marker.markerIndex = info.index;
+
+      // ✅ 추가: 원본 이미지 정보 저장
+      markerOriginalImages.set(info.reservationNo, {
+        normalSrc: info.imageSrc,
+        completeSrc: getCompleteImageByIndex(info.index),
+        imageSize: info.imageSize,
+      });
 
       const deliveryInfo = deliveryList.value.find(
         (d) => d.storeName === info.title || d.reservationNo === info.reservationNo
       );
+      
+      // ✅ 수정: 완료 상태면 complete 이미지로 설정
       if (deliveryInfo && deliveryInfo.status === "completed") {
-        marker.setOpacity(0.4);
+        const completeImageSrc = getCompleteImageByIndex(info.index);
+        const completeImage = new kakao.maps.MarkerImage(
+          completeImageSrc,
+          new kakao.maps.Size(info.imageSize.width, info.imageSize.height)
+        );
+        marker.setImage(completeImage);
       }
 
       kakao.maps.event.addListener(marker, "click", function () {
@@ -592,12 +661,41 @@ const fitBoundsToMarkers = () => {
   map.setBounds(bounds);
 };
 
-const updateMarkerOpacityByReservation = (reservationNo) => {
+// ✅ 핵심 수정: 마커 이미지 동적 변경 함수
+const updateMarkerImageByReservation = (reservationNo, isSelected = false) => {
   const marker = markers.find((m) => m.reservationNo === reservationNo);
   const delivery = deliveryList.value.find((d) => d.reservationNo === reservationNo);
-  if (marker && delivery) {
-    marker.setOpacity(delivery.status === "completed" ? 0.4 : 1);
+  
+  if (!marker || !delivery) return;
+  
+  const imageInfo = markerOriginalImages.get(reservationNo);
+  if (!imageInfo) return;
+  
+  let imageSrc;
+  
+  // 선택 여부와 완료 상태에 따라 이미지 결정
+  if (isSelected) {
+    // 선택된 상태
+    if (delivery.status === "completed") {
+      imageSrc = "/images/kms/select_complete_pin.png";
+    } else {
+      imageSrc = "/images/kms/select_pin.png";
+    }
+  } else {
+    // 선택되지 않은 상태
+    if (delivery.status === "completed") {
+      imageSrc = imageInfo.completeSrc;
+    } else {
+      imageSrc = imageInfo.normalSrc;
+    }
   }
+  
+  const newImage = new kakao.maps.MarkerImage(
+    imageSrc,
+    new kakao.maps.Size(imageInfo.imageSize.width, imageInfo.imageSize.height)
+  );
+  
+  marker.setImage(newImage);
 };
 
 const formatTelHref = (phone) => {
@@ -622,14 +720,6 @@ watch(
   },
   { immediate: true }
 );
-
-// 🔧 초기 마운트 시 지도 초기화
-// onMounted(() => {
-//   // query 확인은 watch에서 처리하므로 지도 초기화만
-//   if (!route.query.view || route.query.view === "map") {
-//     initMap();
-//   }
-// });
 </script>
 
 <style scoped>

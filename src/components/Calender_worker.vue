@@ -73,17 +73,6 @@
         >
           {{ formatIncome(day.workData.totalIncome) }}
         </div>
-
-        <!-- 기존 일정 정보 (오전/오후 표시) -->
-        <!-- <div v-if="day.schedule && day.isCurrentMonth" class="absolute left-1 right-1 top-7"> -->
-        <!-- 시간대 표시 -->
-        <!-- <div
-            class="w-full rounded-md text-right pr-1 mb-1 text-[12px] text-[#111] overflow-hidden text-ellipsis whitespace-nowrap"
-            :class="day.schedule.type === '오후' ? 'bg-[rgba(95,201,94,0.2)]' : 'bg-[rgba(69,166,255,0.2)]'"
-          >
-            <p class="pr-1 m-0">{{ day.schedule.type }}</p>
-          </div> -->
-        <!-- </div> -->
       </div>
     </div>
 
@@ -160,225 +149,26 @@
 </template>
 
 <script>
+// JSON 파일 import
+import calendarData from "@/data/calendar_worker.json";
+
 export default {
   name: "CalendarComponent",
   data() {
     const today = new Date();
     return {
-      currentYear: 2025,
-      currentMonth: 10,
+      currentYear: today.getFullYear(),
+      currentMonth: today.getMonth() + 1,
       today: {
         year: today.getFullYear(),
         month: today.getMonth() + 1,
         date: today.getDate(),
       },
       selectedDate: null,
-      
-      // 샘플 일정 데이터
-      schedules: {
-        "2025-10-1": { amount: "34,200" },
-        "2025-10-2": { amount: "36,720" },
-        "2025-10-3": { amount: "34,350" },
-        "2025-10-4": { amount: "33,850" },
-        "2025-10-8": { amount: "21,850" },
-        "2025-10-9": { amount: "22,850" },
-        "2025-10-10": { amount: "30,850" },
-        "2025-10-11": { amount: "20,850" },
-        "2025-10-15": { amount: "20,350" },
-        "2025-10-16": { amount: "21,250" },
-        "2025-10-17": { amount: "30,100" },
-        "2025-10-18": { amount: "20,200" },
-        "2025-10-22": { amount: "21,400" },
-        "2025-10-23": { amount: "20,150" },
-        "2025-10-24": { amount: "30,800" },
-        "2025-10-25": { amount: "22,150" },
-        "2025-10-27": { amount: "20,150" },
-        "2025-10-29": { amount: "21,350" },
-      },
 
-      // 근무 상세 데이터
-      workData: {
-        "2025-10-1": {
-          workHours: "7시간 30분",
-          deliveryCount: 28,
-          baseIncome: 28000,
-          quickResponseBonus: 3000,
-          longDistanceBonus: 2000,
-          weatherBonus: 0,
-          peakTimeBonus: 1200,
-          totalIncome: 34200,
-        },
-        "2025-10-2": {
-          workHours: "8시간 10분",
-          deliveryCount: 32,
-          baseIncome: 30000,
-          quickResponseBonus: 3500,
-          longDistanceBonus: 2200,
-          weatherBonus: 0,
-          peakTimeBonus: 1020,
-          totalIncome: 36720,
-        },
-        "2025-10-3": {
-          workHours: "7시간 20분",
-          deliveryCount: 29,
-          baseIncome: 28500,
-          quickResponseBonus: 3000,
-          longDistanceBonus: 1850,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 34350,
-        },
-        "2025-10-4": {
-          workHours: "7시간 00분",
-          deliveryCount: 27,
-          baseIncome: 27500,
-          quickResponseBonus: 3000,
-          longDistanceBonus: 2350,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 33850,
-        },
-        "2025-10-8": {
-          workHours: "5시간 30분",
-          deliveryCount: 18,
-          baseIncome: 18000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 850,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 21850,
-        },
-        "2025-10-9": {
-          workHours: "5시간 40분",
-          deliveryCount: 19,
-          baseIncome: 19000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 850,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 22850,
-        },
-        "2025-10-10": {
-          workHours: "6시간 50분",
-          deliveryCount: 25,
-          baseIncome: 25000,
-          quickResponseBonus: 2500,
-          longDistanceBonus: 2350,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 30850,
-        },
-        "2025-10-11": {
-          workHours: "5시간 20분",
-          deliveryCount: 17,
-          baseIncome: 17000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 850,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 20850,
-        },
-        "2025-10-15": {
-          workHours: "5시간 10분",
-          deliveryCount: 16,
-          baseIncome: 16000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 1350,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 20350,
-        },
-        "2025-10-16": {
-          workHours: "5시간 30분",
-          deliveryCount: 17,
-          baseIncome: 17500,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 750,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 21250,
-        },
-        "2025-10-17": {
-          workHours: "6시간 40분",
-          deliveryCount: 24,
-          baseIncome: 24500,
-          quickResponseBonus: 2500,
-          longDistanceBonus: 2100,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 30100,
-        },
-        "2025-10-18": {
-          workHours: "5시간 00분",
-          deliveryCount: 16,
-          baseIncome: 16000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 1200,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 20200,
-        },
-        "2025-10-22": {
-          workHours: "5시간 35분",
-          deliveryCount: 17,
-          baseIncome: 17500,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 900,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 21400,
-        },
-        "2025-10-23": {
-          workHours: "5시간 05분",
-          deliveryCount: 16,
-          baseIncome: 16000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 1150,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 20150,
-        },
-        "2025-10-24": {
-          workHours: "6시간 45분",
-          deliveryCount: 25,
-          baseIncome: 25000,
-          quickResponseBonus: 2500,
-          longDistanceBonus: 2300,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 30800,
-        },
-        "2025-10-25": {
-          workHours: "5시간 45분",
-          deliveryCount: 18,
-          baseIncome: 18000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 1150,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 22150,
-        },
-        "2025-10-27": {
-          workHours: "5시간 05분",
-          deliveryCount: 16,
-          baseIncome: 16000,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 1150,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 20150,
-        },
-        "2025-10-29": {
-          workHours: "5시간 35분",
-          deliveryCount: 17,
-          baseIncome: 17500,
-          quickResponseBonus: 2000,
-          longDistanceBonus: 850,
-          weatherBonus: 0,
-          peakTimeBonus: 1000,
-          totalIncome: 21350,
-        },
-      },
+      // import한 데이터 사용
+      schedules: calendarData.schedules,
+      workData: calendarData.workData,
     };
   },
   computed: {
@@ -447,6 +237,20 @@ export default {
     },
   },
   methods: {
+    // 월 변경될 때 금액 합계 계산하기
+    calculateMonthlyIncome() {
+      const year = this.currentYear;
+      const month = this.currentMonth;
+
+      const filteredData = Object.keys(this.workData)
+        .filter((date) => date.startsWith(`${year}-${month}-`))
+        .map((date) => this.workData[date].totalIncome);
+
+      const total = filteredData.reduce((sum, v) => sum + v, 0);
+
+      this.$emit("update-income", total);
+    },
+
     prevMonth() {
       if (this.currentMonth === 1) {
         this.currentMonth = 12;
@@ -455,7 +259,9 @@ export default {
         this.currentMonth--;
       }
       this.selectedDate = null;
+      this.calculateMonthlyIncome();
     },
+
     nextMonth() {
       if (this.currentMonth === 12) {
         this.currentMonth = 1;
@@ -464,10 +270,11 @@ export default {
         this.currentMonth++;
       }
       this.selectedDate = null;
+      this.calculateMonthlyIncome();
     },
     selectDate(day) {
       if (!day.isCurrentMonth) return;
-      if (!day.workData) return; // 근무 데이터 없으면 클릭 불가
+      if (!day.workData) return;
 
       // 토글: 같은 날짜 클릭 시 선택 해제
       if (this.selectedDate === day.fullDate) {
