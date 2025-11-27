@@ -125,11 +125,14 @@
 
 <script setup>
 import { ref, onMounted, watch, nextTick } from "vue";
-import notices from "@/data/notice.json";
+import { useRoute, useRouter } from "vue-router";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import notices from "@/data/notice.json";
 
+const route = useRoute();
+const router = useRouter();
 const modules = [Autoplay];
 const noticeList = ref(notices);
 
@@ -317,17 +320,37 @@ const initProgressMaps = () => {
   });
 };
 
-watch(activeTab, async () => {
-  await nextTick();
-  if (activeTab.value === "waiting") initWaitingMaps();
-  else initProgressMaps();
-});
+// watch(activeTab, async () => {
+//   await nextTick();
+//   if (activeTab.value === "waiting") initWaitingMaps();
+//   else initProgressMaps();
+// });
 
 onMounted(() => {
+  // query.tab이 있으면 사용, 없으면 'waiting'을 기본값으로
+  activeTab.value = route.query.tab || "waiting";
+
   if (window.kakao && window.kakao.maps) {
-    window.kakao.maps.load(() => initWaitingMaps());
+    window.kakao.maps.load(() => {
+      if (activeTab.value === "progress") {
+        initProgressMaps();
+      } else {
+        initWaitingMaps();
+      }
+    });
   }
 });
+// watch 수정
+watch(
+  () => route.query.tab,
+  async (newTab) => {
+    // newTab이 undefined거나 빈 문자열이면 'waiting'으로
+    activeTab.value = newTab || "waiting";
+    await nextTick();
+    if (activeTab.value === "progress") initProgressMaps();
+    else initWaitingMaps();
+  }
+);
 </script>
 
 <style scoped>

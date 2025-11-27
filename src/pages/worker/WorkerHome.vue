@@ -35,7 +35,7 @@
               <div class="border-b border-gray-200">
                 <div class="px-6">
                   <h3 class="font-[Cafe24Surround] text-[24px] text-[#50311D] mb-4">김빵장 라이더님</h3>
-                  <div class="flex gap-6">
+                  <div class="flex gap-10">
                     <div>
                       <p class="text-gray-400 font-[SpokaHanSansNeo] text-[14px]">완료건수</p>
                       <p class="text-[#50311D] font-[SpokaHanSansNeo] text-[18px] font-bold">5건</p>
@@ -51,13 +51,47 @@
               <div class="p-6">
                 <!-- <h2 class="text-xl font-bold text-[#50311D] font-[SpokaHanSansNeo] mb-4">메뉴</h2> -->
                 <ul class="space-y-4 font-[SpokaHanSansNeo]">
-                  <li class="text-lg text-[#50311D] cursor-pointer">오늘의 수입</li>
-                  <li class="text-lg text-[#50311D] cursor-pointer">정산 내역</li>
-                  <li class="text-lg text-[#50311D] cursor-pointer">보험 관리</li>
-                  <li class="text-lg text-[#50311D] cursor-pointer">배달 기록</li>
-                  <li class="text-lg text-[#50311D] cursor-pointer">운행 시간</li>
-                  <li class="text-lg text-[#50311D] cursor-pointer">이벤트 및 공지사항</li>
-                  <li class="text-lg text-[#50311D] cursor-pointer">문의하기</li>
+                  <li
+                    @click="goMenu('/worker/dashboard?tab=progress')"
+                    class="text-lg text-[#50311D] cursor-pointer flex gap-2 items-center"
+                  >
+                    <div class="w-[24px]">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p>배정 완료</p>
+                  </li>
+                  <li
+                    @click="goMenu('/worker/notice?tab=alert')"
+                    class="text-lg text-[#50311D] cursor-pointer flex gap-2 items-center"
+                  >
+                    <div class="w-[24px]"><i class="fa-solid fa-bell"></i></div>
+                    <p>개별 알림</p>
+                  </li>
+                  <li
+                    @click="goMenu('/worker/jobs?view=list')"
+                    class="text-lg text-[#50311D] cursor-pointer flex gap-2 items-center"
+                  >
+                    <div class="w-[24px]"><i class="fa-solid fa-truck"></i></div>
+                    <p>진행 중인 업무</p>
+                  </li>
+                  <li
+                    @click="goMenu('/worker/mypage')"
+                    class="text-lg text-[#50311D] cursor-pointer flex gap-2 items-center"
+                  >
+                    <div class="w-[24px]"><i class="fa-solid fa-cash-register"></i></div>
+                    <p>정산내역</p>
+                  </li>
+                  <li
+                    @click="goMenu('/worker/notice?tab=news')"
+                    class="text-lg text-[#50311D] cursor-pointer flex gap-2 items-center"
+                  >
+                    <div class="w-[24px]"><i class="fa-solid fa-bullhorn"></i></div>
+                    <p>공지사항</p>
+                  </li>
+                  <li class="text-lg text-[#50311D] cursor-pointer flex gap-2 items-center">
+                    <div class="w-[24px]"><i class="fa-solid fa-circle-question"></i></div>
+                    <p>문의하기</p>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -131,6 +165,14 @@ const links = [
 const activateMenu = (path) => {
   activeMenu.value = path;
   isSubMenuOpen.value = false;
+  // dashboard로 갈 때는 명시적으로 waiting 탭으로
+  if (path === "/worker/dashboard") {
+    router.push({ path: "/worker/dashboard", query: { tab: "waiting" } });
+  } else if (path === "/worker/notice") {
+    router.push({ path: "/worker/notice", query: { tab: "news" } });
+  } else if (path === "/worker/jobs") {
+    router.push({ path: "/worker/jobs", query: {} });
+  }
 };
 
 const toggleSubMenu = () => {
@@ -145,6 +187,46 @@ const closeSubMenu = () => {
 
 const goMenu = (path) => {
   isSubMenuOpen.value = false;
+
+  // path에서 기본 경로만 추출 (query 제거)
+  let basePath = path;
+  if (path.includes("?")) {
+    basePath = path.split("?")[0];
+  }
+
+  // activeMenu 업데이트
+  activeMenu.value = basePath;
+
+  // 현재 경로와 같은지 확인
+  const isSamePath = route.path === basePath;
+
+  // if (path === "/worker/jobs" || basePath === "/worker/jobs") {
+  //   if (isSamePath) {
+  //     // 같은 페이지면 replace 사용
+  //     router.replace({ path: "/worker/jobs", query: { view: "list" } });
+  //   } else {
+  //     router.push({ path: "/worker/jobs", query: { view: "list" } });
+  //   }
+  //   return;
+  // }
+
+  if (path.includes("?")) {
+    const [pathname, queryString] = path.split("?");
+    const queryParams = {};
+    queryString.split("&").forEach((param) => {
+      const [key, value] = param.split("=");
+      queryParams[key] = value;
+    });
+
+    if (isSamePath) {
+      // 같은 페이지면 replace로 query만 변경
+      router.replace({ path: pathname, query: queryParams });
+    } else {
+      router.push({ path: pathname, query: queryParams });
+    }
+    return;
+  }
+
   router.push(path);
 };
 

@@ -56,9 +56,9 @@
 
       <!-- 오른쪽 메인 영역 -->
       <div class="flex-1 ml-64 min-h-screen ">
-        <div class="w-full bg-red-900">
+        <div class="w-full ">
           <!-- 기존 상단 sticky 영역 내부 -->
-          <div class="sticky top-0 z-10 bg-gray-100 dark:bg-gray-900 px-1 ">
+          <div class="sticky top-0 z-10 bg-gray-100 dark:bg-gray-900 px-1  border-b-gray-100 border-b-5 ">
             <div class=" flex bg-white dark:bg-gray-800 rounded-lg mx-3 px-8 shadow-xs">
               <!-- 사고발생 경고창 배너 (80% 너비) -->
               <div class="flex-1">
@@ -102,7 +102,7 @@
             </div>
           </div>
           <!-- 메인 컨텐츠 -->
-          <div class="flex-1 p-4">
+          <div class="flex-1 px-4 pt-2">
             <router-view></router-view>
           </div>
         </div>
@@ -162,21 +162,36 @@ const alerts = ref([
 const uncheckedAlerts = computed(() => alerts.value.filter((a) => !a.checked));
 const modalVisible = ref(false);
 const showEmergencyModal = ref(false);
-const openEmergencyModal = () => {
-  modalVisible.value = true;
-};
+// const openEmergencyModal = () => {
+//   modalVisible.value = true;
+// };
 // 미확인 알림의 총 개수
 const totalUncheckedCount = computed(() => alerts.value.filter((a) => !a.checked).length);
-// 팝업 띄우기
+
+
+// 대시보드 경로인지 확인하는 computed 속성
+const isDashboard = computed(() => route.path === "/admin/dashboard");
+// 대시보드일 때만 모달 띄우기
 onMounted(() => {
-  if (uncheckedAlerts.value.length > 0) {
+  if (isDashboard.value && uncheckedAlerts.value.length > 0) {
     showEmergencyModal.value = true;
   }
 });
-
+// 모달 닫기 및 처리
 const handleAllChecked = () => {
   alerts.value.forEach((a) => (a.checked = true));
+  showEmergencyModal.value = false; // 모달을 닫음
 };
+
+// 팝업 페이지마다 띄우기
+// onMounted(() => {
+//   if (uncheckedAlerts.value.length > 0) {
+//     showEmergencyModal.value = true;
+//   }
+// });
+// const handleAllChecked = () => {
+//   alerts.value.forEach((a) => (a.checked = true));
+// };
 </script>
 
 <style scoped>
