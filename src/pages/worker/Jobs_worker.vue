@@ -173,7 +173,7 @@
                   class="text-gray-800 text-base underline"
                 >
                 <i class="fa-solid fa-phone text-gray-500 text-sm"></i>
-                  {{  selectedMarker.phone }}
+                  {{ selectedMarker.phone }}
                 </a>
                 <span v-else class="text-gray-800 text-base">—</span>
               </div>
@@ -304,7 +304,7 @@ const deliveryList = ref([
     storeName: "공주당",
     customerName: "이빵순",
     phone: "010-2345-6789",
-    storage: "빵장고 [중앙로점]",
+    storage: "빵장고 [동대구역점]",
     status: "delivering",
     originalIndex: 1,
   },
@@ -313,7 +313,7 @@ const deliveryList = ref([
     storeName: "소베",
     customerName: "박빵돌",
     phone: "010-3456-7890",
-    storage: "빵장고 [동성로점]",
+    storage: "빵장고 [반월당역점]",
     status: "completed",
     originalIndex: 2,
   },
@@ -331,7 +331,7 @@ const deliveryList = ref([
     storeName: "윈드윈",
     customerName: "정빵식",
     phone: "010-5678-9012",
-    storage: "빵장고 [서문시장점]",
+    storage: "빵장고 [경대병원역점]",
     status: "pickup",
     originalIndex: 4,
   },

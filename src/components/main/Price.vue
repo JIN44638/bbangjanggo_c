@@ -58,7 +58,7 @@
 
 .price {
   position: relative;
-  background-color: #ffebc2;
+  background-color: $bg-color;
   padding-bottom: 50px;
   padding-top: 50px;
   text-align: center;

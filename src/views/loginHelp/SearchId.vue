@@ -11,7 +11,7 @@
         <p>휴대폰 번호</p>
         <div class="info-txt-box">
           <input type="text" placeholder="010-1234-5678" />
-          <button>인증번호 발송</button>
+          <button>인증번호</button>
         </div>
       </div>
       <div class="infoBox">
@@ -41,6 +41,7 @@ import FlowAd from '@/components/FlowAd.vue';
     h2 {
       font-family: "Cafe24Surround";
       color: $point-color;
+      font-size: $sub-font;
       text-align: center;
       margin-bottom: 40px;
     }

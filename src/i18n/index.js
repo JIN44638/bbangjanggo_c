@@ -1,3 +1,5 @@
+import Login from "@/views/Login.vue";
+import Mypage from "@/views/Mypage.vue";
 import { createI18n } from "vue-i18n";
 
 // 번역 더미 데이터
@@ -9,21 +11,28 @@ const ko = {
     en: "English",
     ja: "日本語",
   },
-  common: {
-    close: "닫기",
-  },
-  nav: {
+  header: {
     home: "홈",
     reserve: "예약하기",
-    review: "리뷰보기",
-    contact: "문의하기",
+    location: "지점안내",
+    howto: "이용방법",
+    price: "요금안내",
+    faq: "FAQ|문의",
   },
-  home: {
-    title: "홈 페이지",
-    goReserve: "예약하러 가기",
-    goReview: "리뷰보러 가기",
+  status: {
+    login: "로그인",
+    logout: "로그아웃",
+    signup: "회원가입",
+    mypage: "마이페이지",
   },
- 
+  visual: {
+    line1: "빵은 저희에게 맡기고",
+    line2: "편히 여행하세요",
+    pickup1: "직접",
+    pickup2: "맡길게요",
+    delivery1: "기사님께",
+    delivery2: "맡길게요",
+  },
 };
 
 // 영어 번역
@@ -34,21 +43,28 @@ const en = {
     en: "English",
     ja: "日本語",
   },
-  common: {
-    close: "Close",
-  },
-  nav: {
+  header: {
     home: "Home",
     reserve: "Reserve",
-    review: "Reviews",
-    contact: "Contact",
+    location: "Locations",
+    howto: "How to Use",
+    price: "Pricing",
+    faq: "FAQ",
   },
-  home: {
-    title: "Home Page",
-    goReserve: "Go to Reservation",
-    goReview: "Go to Reviews",
+  status: {
+    login: "Login",
+    logout: "Logout",
+    signup: "Sign Up",
+    mypage: "My Page",
   },
- 
+  visual: {
+    line1: "Leave your luggage to us",
+    line2: "and travel comfortably",
+    pickup1: "Drop off",
+    pickup2: "in person",
+    delivery1: "Delivery",
+    delivery2: "service",
+  },
 };
 
 // 일본어 번역
@@ -59,24 +75,29 @@ const ja = {
     en: "English",
     ja: "日本語",
   },
-  common: {
-    close: "閉じる",
-  },
-  nav: {
+  header: {
     home: "ホーム",
     reserve: "予約する",
-    review: "レビューを見る",
-    contact: "お問い合わせ",
+    location: "店舗案内",
+    howto: "利用方法",
+    price: "料金案内",
+    faq: "FAQ|お問い合わせ",
   },
-  home: {
-    title: "ホームページ",
-    goReserve: "予約しに行く",
-    goReview: "レビューを見に行く",
+  status: {
+    login: "ログイン",
+    logout: "ログアウト",
+    signup: "会員登録",
+    mypage: "マイページ",
   },
- 
+  visual: {
+    line1: "荷物はお任せください",
+    line2: "快適な旅行を",
+    pickup1: "直接",
+    pickup2: "預ける",
+    delivery1: "配達",
+    delivery2: "サービス",
+  },
 };
-
-
 
 // i18n 인스턴스 생성
 const i18n = createI18n({

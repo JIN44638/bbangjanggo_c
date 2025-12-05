@@ -1,8 +1,10 @@
 <template>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
   <footer>
     <div class="inner foot-inner">
       <div class="logo">
-        <img src="/images/pjs/logo_white(hor.).png" alt="logo" />
+        <img src="/images/kms/foot_logo.png" alt="logo" />
       </div>
       <div class="footer-right">
         <div class="footer-text">
@@ -25,9 +27,9 @@
             <p>ios 전용</p>
           </div>
           <div class="sns">
-            <!-- <img src="/images/pjs/twiter.png" alt="sns" /> -->
-            <img src="/images/pjs/facebook.png" alt="sns" />
-            <img src="/images/pjs/instagram.png" alt="sns" class="sns1" />
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
           </div>
         </div>
       </div>
@@ -44,9 +46,8 @@
 @use "/src/assets/variables" as *;
 
 footer {
-  background-color: $point-color;
-  padding: 15px 0;
- 
+  background-color: $bg-color;
+  padding: 40px 0;
 
   .foot-inner {
     display: flex;
@@ -67,7 +68,7 @@ footer {
       flex-grow: 1;
       justify-content: space-between;
       .footer-text {
-        color: #fff;
+        color: $sub-color;
         font-family: "SpokaHanSansNeo";
         font-size: $mobile-notice-font;
         font-weight: 300;
@@ -113,6 +114,8 @@ footer {
           align-items: center;
           justify-content: flex-start;
           padding-top: 8px;
+          color: $sub-color;
+          font-size: 16px;
           // padding-top: 5px;
 
           img {

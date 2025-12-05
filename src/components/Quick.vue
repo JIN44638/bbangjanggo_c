@@ -249,10 +249,10 @@ const goToSection = async (sectionId) => {
   }
 
   /* 📱 모바일일 때만 ellipsis 클릭 시 나머지 버튼 숨김/보임 */
-  @media (max-width: 768px) {
-    .sub-btn {
-      display: none;
-    }
-  }
+  // @media (max-width: 768px) {
+  //   .sub-btn {
+  //     display: none;
+  //   }
+  // }
 }
 </style>

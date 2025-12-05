@@ -1,14 +1,18 @@
 <template>
   <div class="home">
     <section id="visual" class="section"><Visual /></section>
-    <section id="location" class="location">
-      <h1>지점 안내</h1>
-      <Location :showPins="true" />
-    </section>
+    <FlowAd />
+
+      <section id="location" class="location">
+        <h1>지점 안내</h1>
+        <Location :showPins="true" />
+      </section>
+
+
     <section id="howto" class="section"><Howto /></section>
-    <section id="price" class="section">
-      <Price />
-    </section>
+      <section id="price" class="section">
+        <Price />
+      </section>
     <section id="event" class="section"><Event /></section>
     <section id="review" class="section"><Review /></section>
     <section id="faq" class="section"><Faq /></section>
@@ -22,6 +26,7 @@ import Price from "@/components/main/Price.vue";
 import Event from "@/components/main/Event.vue";
 import Review from "@/components/main/Review.vue";
 import Faq from "@/components/main/Faq.vue";
+import FlowAd from "@/components/FlowAd.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +53,7 @@ import Faq from "@/components/main/Faq.vue";
     }
   }
 }
+
 @media (max-width: 768px) {
   .location {
     padding: 40px 0;

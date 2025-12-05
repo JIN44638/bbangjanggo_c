@@ -40,26 +40,36 @@
 
       <!-- 🔗헤더 메뉴 -->
       <nav class="header-menu">
-        <RouterLink to="/reservation">예약하기</RouterLink>
-        <a href="#location" @click.prevent="goToSection('location')">지점안내</a>
-        <a href="#howto" @click.prevent="goToSection('howto')">이용방법</a>
-        <a href="#price" @click.prevent="goToSection('price')">요금안내</a>
-        <a href="#faq" @click.prevent="goToSection('faq')">FAQ|문의</a>
+        <RouterLink to="/reservation">{{ $t("header.reserve")}}</RouterLink>
+        <a href="#location" @click.prevent="goToSection('location')">{{ $t("header.location")}}</a>
+        <a href="#howto" @click.prevent="goToSection('howto')">{{ $t("header.howto")}}</a>
+        <a href="#price" @click.prevent="goToSection('price')">{{ $t("header.price")}}</a>
+        <a href="#faq" @click.prevent="goToSection('faq')">{{ $t("header.faq")}}</a>
       </nav>
 
       <!-- 헤더 로그인 메뉴 -->
       <div class="header-loginMenu">
         <!-- 로그인 상태 -->
         <div v-if="loggedInUser" class="loginIcon" :key="'logout-' + loggedInUser?.name" @click.prevent="logout">
-          <RouterLink to="/login">로그아웃</RouterLink>
+          <RouterLink to="/login">{{ $t("status.logout")}}</RouterLink>
         </div>
         <!-- 로그아웃 상태-->
         <div class="user-logform-logout" v-else to="/login" key="login">
-          <RouterLink to="/login">로그인</RouterLink>
-          <RouterLink to="/signup">회원가입</RouterLink>
+          <RouterLink to="/login">{{ $t("status.login")}}</RouterLink>
+          <RouterLink to="/signup">{{ $t("status.signup")}}</RouterLink>
         </div>
         <!-- 마이페이지 -->
-        <RouterLink to="/login" @click.prevent="goMyPage">마이페이지</RouterLink>
+        <RouterLink to="/login" @click.prevent="goMyPage">{{ $t("status.mypage")}}</RouterLink>
+        <!-- 언어변경 선택박스 -->
+        <!-- 언어변경 -->
+        <div class="lang-select">
+          <label class="sr-only" for="lang">{{ t("lang.label") }}</label>
+          <select id="lang" v-model="currentLang" @change="onChangeLang">
+            <option value="ko">{{ t("lang.ko") }}</option>
+            <option value="en">{{ t("lang.en") }}</option>
+            <option value="ja">{{ t("lang.ja") }}</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -97,6 +107,7 @@
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted, computed, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 
 const loggedInUser = ref(null);
@@ -261,6 +272,18 @@ const logout = () => {
   window.dispatchEvent(new Event("storage"));
   checkedLogin(); // 즉시 반영
   alert("로그아웃 되었습니다!");
+};
+
+// 언어 변경
+const { locale, t } = useI18n();
+// 둘다 없으면 기본 언어를 사용하기 (기본값 : ko)
+const currentLang = ref(locale.value || localStorage.getItem("language") || "ko");
+// 언어변경 함수
+const onChangeLang = () => {
+  // locale.value를 현재 선택된 언어로 변경
+  locale.value = currentLang.value;
+  // 선택된 언어를 브라우저 localStorage에 저장 하기
+  localStorage.setItem("language", currentLang.value);
 };
 </script>
 
@@ -467,6 +490,16 @@ header {
       opacity: 1;
       pointer-events: auto;
     }
+  }
+
+  #lang{
+    // background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+  }
+  #lang option{
+    color: #333;
   }
 
   @media (max-width: 1000px) {

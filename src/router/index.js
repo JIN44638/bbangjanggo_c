@@ -24,6 +24,7 @@ import InfoRegister_worker from "@/pages/worker/InfoRegister_worker.vue";
 import Payment_admin from "@/pages/admin/Payment_admin.vue";
 import Custormer_admin from "@/pages/admin/Custormer_admin.vue";
 import Notice_admin from "@/pages/admin/Notice_admin.vue";
+import Notfound from "@/views/Notfound.vue";
 
 const routes = [
   // 메인페이지
@@ -36,6 +37,9 @@ const routes = [
   { path: "/signup", component: Signup },
   { path: "/searchid", component: SearchId, meta: { hideFooter: true } },
   { path: "/searchPass", component: SearchPassword, meta: { hideFooter: true } },
+
+  // 404
+    { path: "/:pathMatch(.*)*" , component:Notfound, name: "NotFound"},
 
   // 관리자 및 기사 로그인 페이지
   { path: "/loginworker", component: Login_worker },

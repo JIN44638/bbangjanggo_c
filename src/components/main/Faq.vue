@@ -120,7 +120,7 @@ onMounted(async () => {
 @use "/src/assets/variables" as *;
 
 .faq {
-  padding: 50px 20px;
+  padding: 0 20px;
   background-color: $bg-color;
   @media (max-width: 768px) {
     .faq {

@@ -1,17 +1,26 @@
 <template>
   <div class="visual">
-    <div class="visual-txt">
-      <h1>빵은 저희에게 맡기고 <br />편히 여행하세요</h1>
+    <div class="visual-txt" :class="{ 'locale-ja': locale === 'ja' }">
+      <h1 :class="{ 'font-ja': locale === 'ja' }">
+        {{ t("visual.line1") }}<br />
+        {{ t("visual.line2") }}
+      </h1>
       <div class="reserBtn">
         <RouterLink to="/reservation" class="btn btn-direct">
           <div class="btn-content">
-            <span class="btn-text">직접<br />맡길게요</span>
+            <span class="btn-text">
+              {{ t("visual.pickup1") }}<br />
+              {{ t("visual.pickup2") }}</span
+            >
             <div class="btn-image"></div>
           </div>
         </RouterLink>
         <RouterLink to="/reservation" class="btn btn-delivery">
           <div class="btn-content">
-            <span class="btn-text">기사님께<br />맡길게요</span>
+            <span class="btn-text">
+              {{ t("visual.delivery1") }}<br />
+              {{ t("visual.delivery2") }}</span
+            >
             <div class="btn-image"></div>
           </div>
         </RouterLink>
@@ -20,7 +29,10 @@
   </div>
 </template>
 <script setup>
+import { useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
+
+const { locale, t } = useI18n();
 </script>
 
 <style lang="scss" scoped>
@@ -47,12 +59,20 @@ import { RouterLink } from "vue-router";
     }
     h1 {
       font-family: "Cafe24Surround";
+      // font-family: "SpokaHanSansNeo";
+      font-weight: bold;
       color: white;
       font-size: 48px;
       z-index: 1;
       // padding-top: 40%;
-    
+
+      // 일본어일 때는 일본어를 지원하는 폰트 사용
+      &.font-ja {
+        font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      }
     }
+
     .reserBtn {
       width: 100%;
       display: flex;
@@ -65,11 +85,17 @@ import { RouterLink } from "vue-router";
       }
 
       .btn {
+        &:hover {
+          // 버튼 애니메이션 호버 시 멈추기
+          :deep(.btn-image) {
+            animation-play-state: paused !important;
+          }
+        }
         // width: 300px
         flex: 1;
         height: 150px;
         border-radius: 20px;
-        background-color: $sub-color;
+        background-color: rgba(186, 142, 95, 0.8);
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -79,7 +105,7 @@ import { RouterLink } from "vue-router";
           // transform: translateY(-2px);
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
           // background-color: darken($color: $point-color, $amount: 10);
-          background-color: rgb(133, 99, 63);
+          background-color: rgb(150, 110, 68);
           // .btn-content {
           //   .btn-image {
           //     transform: scale(1.02);
@@ -88,7 +114,6 @@ import { RouterLink } from "vue-router";
           //   }
           // }
         }
-        //
 
         .btn-content {
           // position: relative;
@@ -124,6 +149,9 @@ import { RouterLink } from "vue-router";
             width: 160px;
             height: 140px;
             flex-shrink: 0;
+            /* 버튼 흔들리는 애니메이션 */
+            animation: swing 1s ease-in-out infinite alternate;
+            transform-origin: center center;
           }
         }
       }
@@ -140,8 +168,23 @@ import { RouterLink } from "vue-router";
         }
       }
     }
+
+    // 일본어일 때 btn-text 폰트 적용
+    &.locale-ja {
+      .reserBtn {
+        .btn {
+          .btn-content {
+            .btn-text {
+              font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN",
+                "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+            }
+          }
+        }
+      }
+    }
   }
 }
+
 @media (max-width: 830px) {
   .visual {
     .visual-txt {
@@ -167,5 +210,14 @@ import { RouterLink } from "vue-router";
   // :deep(.btn-content).btn-image {
   //   right: 10px;
   // }
+}
+/* 흔들림 keyframes */
+@keyframes swing {
+  0% {
+    transform: rotate(-7deg);
+  }
+  100% {
+    transform: rotate(7deg);
+  }
 }
 </style>
