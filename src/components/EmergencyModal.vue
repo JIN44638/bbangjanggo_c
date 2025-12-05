@@ -13,7 +13,7 @@
       </div>
 
       <!-- 리스트 -->
-      <div class="space-y-2 max-h-72 overflow-y-auto pt-1 pr-1">
+      <div class="space-y-2 max-h-72 overflow-y-auto pt-1 pr-1 cursor-pointer">
         <div
           v-for="item in alerts"
           :key="item.id"
@@ -21,8 +21,8 @@
         >
           <!-- 왼쪽 텍스트 (여백 추가됨) -->
           <p class="text-sm text-gray-800 dark:text-gray-200 truncate pl-2">
-            <span class="font-semibold">{{ item.category }}</span>
-            - {{ item.text }}
+            <span class="font-semibold">[{{ item.category }}]</span>
+           {{ item.text }}
           </p>
 
           <!-- 오른쪽 끝 체크 아이콘 -->
@@ -37,7 +37,7 @@
       <!-- 하단 버튼 -->
       <div class="flex justify-end mt-2 mr-1">
         <button
-          class="px-3 py-1.5 rounded bg-[#BA8E5F] text-white text-sm font-semibold hover:bg-[#A67B54] transition"
+          class="px-3 py-1.5 rounded bg-[#BA8E5F] text-white text-sm font-semibold hover:bg-[#A67B54] transition cursor-pointer"
           @click="confirmAll"
         >
           확인

@@ -55,11 +55,11 @@
       </div>
 
       <!-- 오른쪽 메인 영역 -->
-      <div class="flex-1 ml-64 min-h-screen ">
-        <div class="w-full ">
+      <div class="flex-1 ml-64 min-h-screen">
+        <div class="w-full">
           <!-- 기존 상단 sticky 영역 내부 -->
-          <div class="sticky top-0 z-10 bg-gray-100 dark:bg-gray-900 px-1  border-b-gray-100 border-b-5 ">
-            <div class=" flex bg-white dark:bg-gray-800 rounded-lg mx-3 px-8 shadow-xs">
+          <div class="sticky top-0 z-10 bg-gray-100 dark:bg-gray-900 px-1 border-b-gray-100 border-b-5">
+            <div class="flex bg-white dark:bg-gray-800 rounded-lg mx-3 px-8 shadow-xs">
               <!-- 사고발생 경고창 배너 (80% 너비) -->
               <div class="flex-1">
                 <AlertBanner />
@@ -102,7 +102,7 @@
             </div>
           </div>
           <!-- 메인 컨텐츠 -->
-          <div class="flex-1 px-4 pt-2">
+          <div class="flex-1 px-4 pt-2 pb-3">
             <router-view></router-view>
           </div>
         </div>
@@ -167,7 +167,6 @@ const showEmergencyModal = ref(false);
 // };
 // 미확인 알림의 총 개수
 const totalUncheckedCount = computed(() => alerts.value.filter((a) => !a.checked).length);
-
 
 // 대시보드 경로인지 확인하는 computed 속성
 const isDashboard = computed(() => route.path === "/admin/dashboard");
