@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[768px] m-auto h-screen flex flex-col relative">
+  <div class="w-full max-w-[768px] m-auto h-screen flex flex-col relative">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <!-- router-view 영역 -->
@@ -17,7 +17,7 @@
       <div
         class="z-[999] absolute top-0 right-0 bg-white shadow-lg transition-transform duration-300"
         :class="isSubMenuOpen ? 'translate-x-0' : 'translate-x-full'"
-        style="width: 60%; height: 100%"
+        style="width: 70%; max-width: 300px; height: 100%"
       >
         <!-- 서브메뉴 컨텐츠 -->
         <div class="relative h-full">
@@ -113,7 +113,7 @@
 
     <!-- 하단 메뉴바 -->
     <nav
-      class="z-[9999] flex items-center justify-between bg-white w-full h-[60px] py-4 px-[35px] shadow-[0px_-1px_5px_rgba(0,0,0,0.05)]"
+      class="z-[9999] flex items-center justify-between bg-white w-full h-[60px] py-4 px-4 md:px-[35px] shadow-[0px_-1px_5px_rgba(0,0,0,0.05)]"
     >
       <router-link
         :to="link.path"

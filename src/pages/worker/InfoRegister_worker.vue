@@ -1,7 +1,7 @@
 <template>
   <!-- Font Awesome CDN 추가 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <div class="min-h-screen w-[768px] m-auto px-[85px] py-[85px]">
+  <div class="min-h-screen w-full max-w-[768px] m-auto px-4 md:px-[85px] py-6 md:py-[85px]">
     <h3 class="font-[Cafe24Surround] text-[30px] text-center text-[#50311D] mb-[50px]">필수 정보 입력</h3>
     <!-- 정보 입력란 -->
 

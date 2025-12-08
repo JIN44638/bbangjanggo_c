@@ -1,6 +1,6 @@
 <template>
   <div class="notFound">
-    <div class="img-404"><img src="/images/kms/error_point-logo.png" alt="로고" /></div>
+    <div class="img-404"><img src="/images/kms/error_point-logo.gif" alt="로고" /></div>
     <div class="txt-404">
       <h1>404</h1>
       <p>이 페이지는 없는 페이지 입니다.</p>

@@ -1,6 +1,6 @@
 <template>
   <div class="h-full overflow-y-auto" ref="scrollBox">
-    <div class="w-full m-auto px-[50px] py-[50px]">
+    <div class="w-full m-auto px-4 md:px-[50px] py-6 md:py-[50px]">
       <h3 class="font-[Cafe24Surround] text-[30px] text-center text-[#50311D] mb-[50px]">마이페이지</h3>
       <div class="flex flex-col items-center">
         <!-- 프로필 -->
@@ -20,7 +20,7 @@
           ><span class="text-sm">|</span>
           <span class="text-sm">업무중</span>
         </div>
-        <div class="w-[600px] h-[90px] bg-[#BA8E5F] rounded-2xl relative">
+        <div class="w-full max-w-[600px] h-[90px] bg-[#BA8E5F] rounded-2xl relative">
           <div class="flex h-full text-center">
             <div class="flex flex-col w-1/2 justify-center gap-[5px]">
               <span class="text-[18px] font-[Cafe24Surround] text-[#FFFBF2]">5건</span>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="w-full">
-        <div class="flex w-[600px] m-auto">
+        <div class="flex w-full max-w-[600px] m-auto">
           <Calender_worker @date-selected="scrollToBottom" @update-income="updateIncome" />
         </div>
       </div>

@@ -1,10 +1,10 @@
 <template>
-  <div class="w-[768px] h-full overflow-y-scroll overflow-x-hidden pb-[20px]">
+  <div class="w-full max-w-[768px] mx-auto h-full overflow-y-scroll overflow-x-hidden pb-[20px]">
     <!-- Font Awesome CDN 추가 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <!-- 알림 -->
-    <div class="flex gap-2 items-center rounded-md bg-gray-100 p-3 m-[20px]">
+    <div class="flex gap-2 items-center rounded-md bg-gray-100 p-3 mx-4 md:mx-[20px] my-4 md:my-[20px]">
       <i class="fa-solid fa-bullhorn text-red-600"></i>
       <!-- 알림 스와이퍼 -->
       <div>
@@ -27,7 +27,7 @@
     </div>
 
     <!-- 탭 메뉴 -->
-    <div class="rounded-lg border border-[#50311D] mb-5 mx-[20px]">
+    <div class="rounded-lg border border-[#50311D] mb-5 mx-4 md:mx-[20px]">
       <div class="flex justify-between text-center relative z-10">
         <!-- 대기 탭 -->
         <p
@@ -50,7 +50,7 @@
     </div>
 
     <!-- 대기 탭 -->
-    <div v-show="activeTab === 'waiting'" class="mx-[20px]">
+    <div v-show="activeTab === 'waiting'" class="mx-4 md:mx-[20px]">
       <div v-if="waitingList.length > 0">
         <transition-group name="slide" tag="div">
           <div v-for="(info, index) in waitingList" :key="info.id" class="mb-4 overflow-hidden relative">
@@ -93,7 +93,7 @@
     </div>
 
     <!-- 진행 탭 -->
-    <div v-show="activeTab === 'progress'" class="mx-[20px]">
+    <div v-show="activeTab === 'progress'" class="mx-4 md:mx-[20px]">
       <div v-if="progressList.length > 0" class="space-y-4">
         <div v-for="(info, index) in progressList" :key="'progress-' + info.id" class="cursor-pointer">
           <!-- 지도 -->
@@ -128,7 +128,7 @@
         <div class="absolute inset-0 bg-black/50" @click="closeModal"></div>
 
         <!-- 모달 콘텐츠 -->
-        <div class="relative bg-white rounded-2xl w-[450px] mx-[20px] shadow-2xl transform transition-all">
+        <div class="relative bg-white rounded-2xl w-[90%] max-w-[450px] mx-[20px] shadow-2xl transform transition-all">
           <!-- 아이콘 -->
           <div class="flex justify-center pt-8 pb-4">
             <div class="w-[50px] h-[50px] bg-[#50311D] rounded-full flex items-center justify-center">

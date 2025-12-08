@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[768px] h-full m-auto p-[30px] overflow-y-scroll">
+  <div class="w-full max-w-[768px] h-full m-auto p-4 md:p-[30px] overflow-y-scroll">
     <h3 class="font-[Cafe24Surround] text-[28px] text-center text-[#50311D] mb-[30px]">알림</h3>
 
     <!-- 탭 -->
