@@ -127,7 +127,7 @@
       <transition name="slide-up">
         <div
           v-if="showPanel"
-          class="w-full h-[360px] sm:h-[400px] bg-white absolute bottom-0 left-0 z-999 text-center rounded-t-2xl sm:rounded-t-[1vw] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)]"
+          class="w-full h-[420px] sm:h-[420px] bg-white absolute bottom-0 left-0 z-999 text-center rounded-t-2xl sm:rounded-t-[1vw] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)] pb-8 sm:pb-0"
         >
           <div class="w-full flex flex-row-reverse pt-4 sm:pt-[25px] pb-3 sm:pb-[15px] px-6 sm:px-[50px]">
             <i @click="handleClose" class="fa-solid fa-x text-gray-500 cursor-pointer text-sm sm:text-base"></i>
@@ -454,7 +454,14 @@ const selectMarkerWithBuffer = (info, markerInstance) => {
     updateMarkerImageByReservation(info.reservationNo, true);
 
     if (map && markerInstance) {
-      map.panTo(markerInstance.getPosition());
+      const markerPosition = markerInstance.getPosition();
+      
+      // 먼저 마커로 이동
+      map.setCenter(markerPosition);
+      
+      // 그 다음 패널 높이만큼 지도를 위로 팬 (픽셀 단위)
+      // 패널이 420px이므로 약 210px 정도 아래로 팬
+      map.panBy(0, 210);
     }
   }, 300);
 };
