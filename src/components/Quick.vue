@@ -17,15 +17,15 @@
       </a> -->
       <a class="sub-btn" @click="goPage('/mypage')">
         <img src="/images/pjs/confirm.png" alt="confirm" />
-        <span>예약</span>
+        <span>예약확인</span>
       </a>
       <a href="#faq" @click.prevent="goToSection('faq')" class="sub-btn">
         <img src="/images/pjs/contact.png" alt="contact" />
-        <span>문의</span>
+        <!-- <span>문의하기</span> -->
       </a>
       <a href="#location" @click.prevent="goToSection('location')" class="sub-btn">
         <img src="/images/pjs/search.png" alt="search" />
-        <span>지점</span>
+        <!-- <span>지점찾기</span> -->
       </a>
     </div>
   </div>
@@ -170,14 +170,14 @@ const goToSection = async (sectionId) => {
     display: flex;
     flex-direction: column;
     position: fixed;
-    bottom: 40px;
+    bottom: 30px;
     right: 30px;
     z-index: 10;
     gap: 7px;
     align-items: center;
     @media (max-width: 768px) {
       position: fixed;
-      bottom: 35px;
+      bottom: 15px;
       right: 15px;
     }
   }
@@ -215,16 +215,22 @@ const goToSection = async (sectionId) => {
       // display: none;
       font-size: 12px;
       position: absolute;
-      top: 100%;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
       align-items: center;
       // transform: translateY(-50%);
       right: 55px;
-      left: 50%;
-      transform: translate(-50%, -50%);
+           font-size: $mobile-notice-font;
+      width: max-content;
+      min-width: 60px;
+      background-color: $font-color;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
+ 
       // font-size: $mobile-notice-font;
-      color: $font-color;
-      justify-content: center;
+
       // color: $font-color;
       // width: 42px;
       // height: 42px;
@@ -234,18 +240,18 @@ const goToSection = async (sectionId) => {
       white-space: nowrap;
 
       /* 말풍선 꼬리 */
-      // &::after {
-      //   content: "";
-      //   position: absolute;
-      //   top: 50%;
-      //   right: -6px;
-      //   transform: translateY(-50%);
-      //   width: 0;
-      //   height: 0;
-      //   border-top: 6px solid transparent;
-      //   border-bottom: 6px solid transparent;
-      //   border-left: 6px solid $font-color;
-      // }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -6px;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 6px solid $font-color;
+      }
     }
 
     // &:hover span {
