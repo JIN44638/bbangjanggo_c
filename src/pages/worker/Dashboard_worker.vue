@@ -66,7 +66,16 @@
             <div class="bg-[#C89968] text-white p-4 rounded-b-lg flex justify-between items-center">
               <div>
                 <p class="text-xs font-[SpokaHanSansNeo]">{{ formatDate(info.date) }} {{ info.time }}</p>
-                <p class="text-sm font-[SpokaHanSansNeo] mt-1 mb-2">{{ info.pickUp }} · · · · · {{ info.deliver }}</p>
+                <!-- 모바일 전용 -->
+                <p class="text-sm font-[SpokaHanSansNeo] mt-1 mb-2 sm:hidden">
+                  <span class="block">{{ info.pickUp }}</span>
+                  <span class="block mt-1">{{ info.deliver }}</span>
+                </p>
+
+                <!-- PC용 -->
+                <p class="text-sm font-[SpokaHanSansNeo] mt-1 mb-2 hidden sm:block">
+                  {{ info.pickUp }} · · · · · {{ info.deliver }}
+                </p>
                 <p class="text-sm font-[SpokaHanSansNeo]">
                   (금액) <span class="text-2xl font-bold">{{ info.price }}</span>
                 </p>
