@@ -208,7 +208,7 @@ const goToSection = async (sectionId) => {
     }
 
     span {
-      display: none;
+      // display: none;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -224,24 +224,25 @@ const goToSection = async (sectionId) => {
       white-space: nowrap;
 
       /* 말풍선 꼬리 */
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: -6px;
-        transform: translateY(-50%);
-        width: 0;
-        height: 0;
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
-        border-left: 6px solid $font-color;
-      }
+      // &::after {
+      //   content: "";
+      //   position: absolute;
+      //   top: 50%;
+      //   right: -6px;
+      //   transform: translateY(-50%);
+      //   width: 0;
+      //   height: 0;
+      //   border-top: 6px solid transparent;
+      //   border-bottom: 6px solid transparent;
+      //   border-left: 6px solid $font-color;
+      // }
     }
 
-    &:hover span {
-      display: block;
-    }
+    // &:hover span {
+    //   display: block;
+    // }
   }
+
 
   .ellipsis {
     width: 37px;
