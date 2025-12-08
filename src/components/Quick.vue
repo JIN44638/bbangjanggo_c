@@ -7,10 +7,9 @@
       </a>
 
       <!-- ellipsis 버튼 -->
-      <a class="ellipsis" @click="toggleExpand" >
+      <a class="ellipsis" @click="toggleExpand">
         <img :src="currentEllipsis" alt="ellipsis" />
       </a>
-
       <!-- 나머지 버튼 3개 -->
       <!-- <a class="sub-btn" @click="goPage('/mypage')">
         <img src="/images/pjs/reservation.png" alt="reservation" />
@@ -18,15 +17,15 @@
       </a> -->
       <a class="sub-btn" @click="goPage('/mypage')">
         <img src="/images/pjs/confirm.png" alt="confirm" />
-        <span>예약확인</span>
+        <span>예약</span>
       </a>
       <a href="#faq" @click.prevent="goToSection('faq')" class="sub-btn">
         <img src="/images/pjs/contact.png" alt="contact" />
-        <span>문의하기</span>
+        <span>문의</span>
       </a>
       <a href="#location" @click.prevent="goToSection('location')" class="sub-btn">
         <img src="/images/pjs/search.png" alt="search" />
-        <span> 지점찾기</span>
+        <span>지점</span>
       </a>
     </div>
   </div>
@@ -171,14 +170,14 @@ const goToSection = async (sectionId) => {
     display: flex;
     flex-direction: column;
     position: fixed;
-    bottom: 30px;
+    bottom: 40px;
     right: 30px;
     z-index: 10;
     gap: 7px;
     align-items: center;
     @media (max-width: 768px) {
       position: fixed;
-      bottom: 15px;
+      bottom: 35px;
       right: 15px;
     }
   }
@@ -188,6 +187,10 @@ const goToSection = async (sectionId) => {
     height: 30px;
     box-shadow: none;
   }
+
+  // .sub-btn + .sub-btn {
+  //   margin-top: 21px;   // 여기에서 3개 버튼 간격 조절
+  // }
 
   a {
     position: relative;
@@ -208,18 +211,25 @@ const goToSection = async (sectionId) => {
     }
 
     span {
+      font-weight: bold;
       // display: none;
+      font-size: 12px;
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 100%;
+      display: flex;
+      align-items: center;
+      // transform: translateY(-50%);
       right: 55px;
-      font-size: $mobile-notice-font;
-      width: max-content;
-      min-width: 60px;
-      background-color: $font-color;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 10px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      // font-size: $mobile-notice-font;
+      color: $font-color;
+      justify-content: center;
+      // color: $font-color;
+      // width: 42px;
+      // height: 42px;
+      // background-color: rgba(255, 255, 255, 0.1);
+      // border-radius: 50%;
       z-index: 20;
       white-space: nowrap;
 
@@ -242,7 +252,6 @@ const goToSection = async (sectionId) => {
     //   display: block;
     // }
   }
-
 
   .ellipsis {
     width: 37px;
