@@ -463,7 +463,7 @@ if (map && markerInstance) {
   const markerPixel = projection.containerPointFromCoords(markerPosition);
   
   // 210px 아래 지점의 픽셀 좌표 계산
-  const targetPixel = new kakao.maps.Point(markerPixel.x, markerPixel.y + 210);
+  const targetPixel = new kakao.maps.Point(markerPixel.x, markerPixel.y + 120);
   
   // 픽셀 좌표를 다시 지도 좌표로 변환
   const targetCoords = projection.coordsFromContainerPoint(targetPixel);
