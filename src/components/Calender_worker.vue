@@ -1,21 +1,22 @@
+
 <template>
   <div class="w-full max-w-[728px] mx-auto">
     <!-- 월 선택 헤더 -->
-    <div class="w-full max-w-[320px] mx-auto my-8 mb-5">
+    <div class="w-full max-w-[280px] sm:max-w-[320px] mx-auto my-6 sm:my-8 mb-4 sm:mb-5">
       <!-- 페이지네이션 -->
       <div class="flex items-center justify-between px-2">
         <button
           @click="prevMonth"
-          class="bg-transparent border-none cursor-pointer transition-transform hover:scale-110 active:scale-95 p-1 text-lg text-[#BA8E5F]"
+          class="bg-transparent border-none cursor-pointer transition-transform hover:scale-110 active:scale-95 p-1 text-base sm:text-lg text-[#BA8E5F]"
         >
           <i class="fa-solid fa-caret-left"></i>
         </button>
-        <span class="text-[#111] text-[18px] font-medium font-[Pretendard]">
+        <span class="text-[#111] text-base sm:text-[18px] font-medium font-[Pretendard]">
           {{ currentYear }}년 {{ currentMonth }}월
         </span>
         <button
           @click="nextMonth"
-          class="bg-transparent border-none cursor-pointer transition-transform hover:scale-110 active:scale-95 p-1 text-lg text-[#BA8E5F]"
+          class="bg-transparent border-none cursor-pointer transition-transform hover:scale-110 active:scale-95 p-1 text-base sm:text-lg text-[#BA8E5F]"
         >
           <i class="fa-solid fa-caret-right"></i>
         </button>
@@ -23,14 +24,14 @@
     </div>
 
     <!-- 요일 헤더 -->
-    <div class="grid grid-cols-7 bg-white text-center text-sm font-medium">
-      <div class="py-3 text-[#ff4b0f]">일</div>
-      <div class="py-3 text-[#505050]">월</div>
-      <div class="py-3 text-[#505050]">화</div>
-      <div class="py-3 text-[#505050]">수</div>
-      <div class="py-3 text-[#505050]">목</div>
-      <div class="py-3 text-[#505050]">금</div>
-      <div class="py-3 text-[#4299e1]">토</div>
+    <div class="grid grid-cols-7 bg-white text-center text-xs sm:text-sm font-medium">
+      <div class="py-2 sm:py-3 text-[#ff4b0f]">일</div>
+      <div class="py-2 sm:py-3 text-[#505050]">월</div>
+      <div class="py-2 sm:py-3 text-[#505050]">화</div>
+      <div class="py-2 sm:py-3 text-[#505050]">수</div>
+      <div class="py-2 sm:py-3 text-[#505050]">목</div>
+      <div class="py-2 sm:py-3 text-[#505050]">금</div>
+      <div class="py-2 sm:py-3 text-[#4299e1]">토</div>
     </div>
 
     <!-- 캘린더 그리드 -->
@@ -38,7 +39,7 @@
       <div
         v-for="(day, index) in calendarDays"
         :key="index"
-        class="h-24 bg-white relative cursor-pointer transition-colors"
+        class="aspect-square bg-white relative cursor-pointer transition-colors"
         :class="{
           'border-r border-[#d9d9d9]': (index + 1) % 7 !== 0,
           'border-b border-[#d9d9d9]': index < calendarDays.length - 7,
@@ -49,16 +50,16 @@
       >
         <!-- 날짜 표시 -->
         <span
-          class="absolute top-1 right-2 text-[14px] transition-all"
+          class="absolute top-0.5 sm:top-1 right-1 sm:right-2 text-xs sm:text-[14px] transition-all"
           :class="{
             'text-[#d9d9d9]': !day.isCurrentMonth,
             'text-[#ff4b0f]': day.isCurrentMonth && index % 7 === 0 && !day.isToday && !day.isSelected,
             'text-[#4299e1]': day.isCurrentMonth && index % 7 === 6 && !day.isToday && !day.isSelected,
             'text-[#767676]':
               day.isCurrentMonth && index % 7 !== 0 && index % 7 !== 6 && !day.isToday && !day.isSelected,
-            'font-bold !text-white bg-[#ff6f00] rounded-full w-5 h-5 flex items-center justify-center !right-[6px] !top-[2px]':
+            'font-bold !text-white bg-[#ff6f00] rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center !right-[4px] sm:!right-[6px] !top-[2px]':
               day.isToday && !day.isSelected,
-            'font-bold !text-white bg-[#BA8E5F] rounded-full w-6 h-6 flex items-center justify-center !right-1':
+            'font-bold !text-white bg-[#BA8E5F] rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center !right-0.5 sm:!right-1':
               day.isSelected,
           }"
         >
@@ -68,7 +69,7 @@
         <!-- 수입 금액 표시 (날짜 아래 작게) -->
         <div
           v-if="day.workData && day.isCurrentMonth"
-          class="absolute top-10 left-1/2 -translate-x-1/2 text-[14px] font-medium"
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 text-[11px] sm:text-[14px] font-medium"
           :class="day.isSelected ? 'text-[#BA8E5F]' : 'text-[#767676]'"
         >
           {{ formatIncome(day.workData.totalIncome) }}
@@ -78,54 +79,54 @@
 
     <!-- 선택된 날짜 상세 정보 카드 -->
     <transition name="fade">
-      <div v-if="selectedDateInfo" class="w-full bg-white border border-gray-200 rounded-xl mt-6 shadow-md">
-        <div class="p-6 border-b border-[#FFEBC2]">
+      <div v-if="selectedDateInfo" class="w-full bg-white border border-gray-200 rounded-xl mt-4 sm:mt-6 shadow-md">
+        <div class="p-4 sm:p-6 border-b border-[#FFEBC2]">
           <!-- 날짜 표시 -->
-          <div class="text-sm text-gray-500 font-[SpokaHanSansNeo] mb-4 pb-3 border-b border-gray-100">
+          <div class="text-xs sm:text-sm text-gray-500 font-[SpokaHanSansNeo] mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-100">
             {{ formatDateDisplay(selectedDateInfo.fullDate) }}
           </div>
 
           <!-- 주요 정보 3개 -->
-          <div class="grid grid-cols-3 gap-4 mb-5">
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-5">
             <div class="text-center">
-              <p class="text-xs text-gray-500 font-[SpokaHanSansNeo] mb-2">총 근무 시간</p>
-              <p class="text-lg font-bold font-[Cafe24Surround] text-gray-800">{{ selectedDateInfo.workHours }}</p>
+              <p class="text-[10px] sm:text-xs text-gray-500 font-[SpokaHanSansNeo] mb-1 sm:mb-2">총 근무 시간</p>
+              <p class="text-base sm:text-lg font-bold font-[Cafe24Surround] text-gray-800">{{ selectedDateInfo.workHours }}</p>
             </div>
             <div class="text-center">
-              <p class="text-xs text-gray-500 font-[SpokaHanSansNeo] mb-2">총 배송 건수</p>
-              <p class="text-lg font-bold font-[Cafe24Surround] text-gray-800">
+              <p class="text-[10px] sm:text-xs text-gray-500 font-[SpokaHanSansNeo] mb-1 sm:mb-2">총 배송 건수</p>
+              <p class="text-base sm:text-lg font-bold font-[Cafe24Surround] text-gray-800">
                 {{ selectedDateInfo.deliveryCount }}건
               </p>
             </div>
             <div class="text-center">
-              <p class="text-xs text-gray-500 font-[SpokaHanSansNeo] mb-2">기본 수입</p>
-              <p class="text-lg font-bold font-[Cafe24Surround] text-gray-800">
+              <p class="text-[10px] sm:text-xs text-gray-500 font-[SpokaHanSansNeo] mb-1 sm:mb-2">기본 수입</p>
+              <p class="text-base sm:text-lg font-bold font-[Cafe24Surround] text-gray-800">
                 {{ formatMoney(selectedDateInfo.baseIncome) }}
               </p>
             </div>
           </div>
 
           <!-- 인센티브 세부 항목 -->
-          <div class="space-y-2">
-            <div class="flex justify-between items-center text-sm">
+          <div class="space-y-1.5 sm:space-y-2">
+            <div class="flex justify-between items-center text-xs sm:text-sm">
               <span class="text-gray-600 font-[SpokaHanSansNeo]">빠른 응답 인센티브</span>
               <span class="text-gray-800 font-medium font-[SpokaHanSansNeo]">{{
                 formatMoney(selectedDateInfo.quickResponseBonus)
               }}</span>
             </div>
-            <div class="flex justify-between items-center text-sm">
+            <div class="flex justify-between items-center text-xs sm:text-sm">
               <span class="text-gray-600 font-[SpokaHanSansNeo]">근무지역 외 배송 수당</span>
               <span class="text-gray-800 font-medium font-[SpokaHanSansNeo]">{{
                 formatMoney(selectedDateInfo.longDistanceBonus)
               }}</span>
             </div>
-            <div class="flex justify-between items-center text-sm">
+            <div class="flex justify-between items-center text-xs sm:text-sm">
               <span class="text-gray-600 font-[SpokaHanSansNeo]">우천 배송 수당</span>
               <span class="text-gray-800 font-medium font-[SpokaHanSansNeo]">{{
                 formatMoney(selectedDateInfo.weatherBonus)
               }}</span>
             </div>
-            <div class="flex justify-between items-center text-sm">
+            <div class="flex justify-between items-center text-xs sm:text-sm">
               <span class="text-gray-600 font-[SpokaHanSansNeo]">피크타임 수당</span>
               <span class="text-gray-800 font-medium font-[SpokaHanSansNeo]">{{
                 formatMoney(selectedDateInfo.peakTimeBonus)
@@ -135,10 +136,10 @@
         </div>
 
         <!-- 총 수입 -->
-        <div class="bg-[#FFFBF2] rounded-lg p-4 px-6">
+        <div class="bg-[#FFFBF2] rounded-lg p-3 sm:p-4 px-4 sm:px-6">
           <div class="flex justify-between items-center">
-            <span class="text-base font-semibold font-[SpokaHanSansNeo] text-gray-700">총 수입</span>
-            <span class="text-2xl font-bold font-[Cafe24Surround] text-[#50311D]">{{
+            <span class="text-sm sm:text-base font-semibold font-[SpokaHanSansNeo] text-gray-700">총 수입</span>
+            <span class="text-xl sm:text-2xl font-bold font-[Cafe24Surround] text-[#50311D]">{{
               formatMoney(selectedDateInfo.totalIncome)
             }}</span>
           </div>
@@ -319,12 +320,5 @@ export default {
 .fade-leave-to {
   opacity: 0;
   transform: translateY(-10px);
-}
-
-/* 반응형 */
-@media screen and (max-width: 768px) {
-  .h-24 {
-    height: 80px;
-  }
 }
 </style>

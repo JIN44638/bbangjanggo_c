@@ -1,17 +1,17 @@
 <template>
   <!-- Font Awesome CDN 추가 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <div class="min-h-screen w-full max-w-[768px] m-auto px-4 md:px-[85px] py-6 md:py-[85px]">
-    <h3 class="font-[Cafe24Surround] text-[30px] text-center text-[#50311D] mb-[50px]">필수 정보 입력</h3>
+  <div class="min-h-screen w-full max-w-[768px] m-auto px-5 sm:px-[85px] py-6 sm:py-[85px]">
+    <h3 class="font-[Cafe24Surround] text-2xl sm:text-[30px] text-center text-[#50311D] mb-8 sm:mb-[50px]">필수 정보 입력</h3>
     <!-- 정보 입력란 -->
 
-    <div class="flex flex-col gap-[30px]">
+    <div class="flex flex-col gap-6 sm:gap-[30px]">
       <!-- 주소 입력 -->
-      <div class="flex flex-col gap-[30px]">
-        <h3 class="font-[Cafe24Surround] text-[20px] text-[#50311D]">주소 및 배송 정보</h3>
+      <div class="flex flex-col gap-5 sm:gap-[30px]">
+        <h3 class="font-[Cafe24Surround] text-lg sm:text-[20px] text-[#50311D]">주소 및 배송 정보</h3>
         <!-- 주소 검색 -->
         <div>
-          <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">주소</h3>
+          <h3 class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] mb-3 sm:mb-4">주소</h3>
           <div
             @click="execDaumPostcode"
             class="border border-[#50311D] px-3 py-2 rounded-md flex justify-between items-center"
@@ -20,10 +20,10 @@
               type="text"
               id="sample3_address"
               placeholder="주소 입력하기"
-              class="w-[90%] font-[SpokaHanSansNeo] focus:outline-none"
+              class="w-[90%] font-[SpokaHanSansNeo] text-sm sm:text-base focus:outline-none"
             />
             <button>
-              <i class="fa-solid fa-magnifying-glass text-[#50311D] cursor-pointer"></i>
+              <i class="fa-solid fa-magnifying-glass text-sm sm:text-base text-[#50311D] cursor-pointer"></i>
             </button>
           </div>
 
@@ -43,36 +43,36 @@
 
         <!-- 상세 주소 -->
         <div>
-          <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">상세 주소(선택)</h3>
+          <h3 class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] mb-3 sm:mb-4">상세 주소(선택)</h3>
           <input
             type="text"
             id="sample3_detailAddress"
             placeholder="상세주소 입력하기"
-            class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
+            class="font-[SpokaHanSansNeo] text-sm sm:text-base w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
           />
         </div>
 
         <!-- 배달 지역 선택 -->
         <div>
-          <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">배달 지역</h3>
+          <h3 class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] mb-3 sm:mb-4">배달 지역</h3>
           <div class="relative w-full">
             <button
               type="button"
               @click="locationDropdown"
               class="w-full flex justify-between items-center px-3 py-2 border border-[#50311D] rounded-md"
             >
-              <span class="font-[SpokaHanSansNeo]" :class="selectedLocation ? 'text-gray-800' : 'text-gray-500'">
+              <span class="font-[SpokaHanSansNeo] text-sm sm:text-base" :class="selectedLocation ? 'text-gray-800' : 'text-gray-500'">
                 {{ selectedLocation?.location || placeholder1 }}
               </span>
               <i
-                class="fa-solid fa-caret-down text-[#50311D] transition-transform duration-500"
+                class="fa-solid fa-caret-down text-sm sm:text-base text-[#50311D] transition-transform duration-500"
                 :class="isLocationOpen ? 'rotate-180' : 'rotate-0'"
               ></i>
             </button>
 
             <div
               v-if="isLocationOpen"
-              class="font-[SpokaHanSansNeo] absolute left-0 right-0 bg-white shadow-sm rounded-lg max-h-60 overflow-auto scrollbar-none z-20"
+              class="font-[SpokaHanSansNeo] text-sm sm:text-base absolute left-0 right-0 bg-white shadow-sm rounded-lg max-h-60 overflow-auto scrollbar-none z-20"
             >
               <button
                 v-for="option in locationOptions"
@@ -88,26 +88,26 @@
 
         <!-- 배달 수단 선택 -->
         <div>
-          <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">배달 수단</h3>
+          <h3 class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] mb-3 sm:mb-4">배달 수단</h3>
           <div class="relative w-full">
             <button
               type="button"
               @click="vehicleDropdown"
               class="w-full flex justify-between items-center px-3 py-2 border border-[#50311D] rounded-md"
             >
-              <span class="font-[SpokaHanSansNeo]" :class="selectedVehicle ? 'text-gray-800' : 'text-gray-500'">
+              <span class="font-[SpokaHanSansNeo] text-sm sm:text-base" :class="selectedVehicle ? 'text-gray-800' : 'text-gray-500'">
                 {{ selectedVehicle?.vehicle || placeholder2 }}
               </span>
 
               <i
-                class="fa-solid fa-caret-down text-[#50311D] transition-transform duration-500"
+                class="fa-solid fa-caret-down text-sm sm:text-base text-[#50311D] transition-transform duration-500"
                 :class="isVehicleOpen ? 'rotate-180' : 'rotate-0'"
               ></i>
             </button>
 
             <div
               v-if="isVehicleOpen"
-              class="font-[SpokaHanSansNeo] absolute left-0 right-0 bg-white shadow-sm rounded-lg max-h-60 overflow-auto scrollbar-none z-20"
+              class="font-[SpokaHanSansNeo] text-sm sm:text-base absolute left-0 right-0 bg-white shadow-sm rounded-lg max-h-60 overflow-auto scrollbar-none z-20"
             >
               <button
                 v-for="option in vehicleOption"
@@ -123,31 +123,31 @@
       </div>
 
       <!-- 계좌 정보 입력 -->
-      <div class="flex flex-col gap-[30px]">
-        <h3 class="font-[Cafe24Surround] text-[20px] text-[#50311D]">계좌 정보</h3>
+      <div class="flex flex-col gap-5 sm:gap-[30px]">
+        <h3 class="font-[Cafe24Surround] text-lg sm:text-[20px] text-[#50311D]">계좌 정보</h3>
 
         <!-- 은행 선택 -->
         <div>
-          <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">은행</h3>
+          <h3 class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] mb-3 sm:mb-4">은행</h3>
           <div class="relative w-full">
             <button
               type="button"
               @click="bankDropdown"
               class="w-full flex justify-between items-center px-3 py-2 border border-[#50311D] rounded-md"
             >
-              <span class="font-[SpokaHanSansNeo]" :class="selectedBank ? 'text-gray-800' : 'text-gray-500'">
+              <span class="font-[SpokaHanSansNeo] text-sm sm:text-base" :class="selectedBank ? 'text-gray-800' : 'text-gray-500'">
                 {{ selectedBank?.bank || placeholder3 }}
               </span>
 
               <i
-                class="fa-solid fa-caret-down text-[#50311D] transition-transform duration-500"
+                class="fa-solid fa-caret-down text-sm sm:text-base text-[#50311D] transition-transform duration-500"
                 :class="isBankOpen ? 'rotate-180' : 'rotate-0'"
               ></i>
             </button>
 
             <div
               v-if="isBankOpen"
-              class="font-[SpokaHanSansNeo] absolute left-0 right-0 bg-white shadow-sm rounded-lg max-h-60 overflow-auto scrollbar-none z-20"
+              class="font-[SpokaHanSansNeo] text-sm sm:text-base absolute left-0 right-0 bg-white shadow-sm rounded-lg max-h-60 overflow-auto scrollbar-none z-20"
             >
               <button
                 v-for="option in bankOptions"
@@ -163,23 +163,23 @@
 
         <!-- 예금주 입력 -->
         <div>
-          <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">예금주</h3>
+          <h3 class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] mb-3 sm:mb-4">예금주</h3>
           <input
             type="text"
             v-model="accountName"
             placeholder="예금주 입력하기"
-            class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
+            class="font-[SpokaHanSansNeo] text-sm sm:text-base w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
           />
         </div>
 
         <!-- 계좌번호 입력 -->
         <div>
-          <h3 class="font-[SpokaHanSansNeo] text-4 text-[#50311D] mb-4">계좌번호</h3>
+          <h3 class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] mb-3 sm:mb-4">계좌번호</h3>
           <input
             type="text"
             v-model="accountNumber"
             placeholder="계좌번호 - 없이 입력하기"
-            class="font-[SpokaHanSansNeo] w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
+            class="font-[SpokaHanSansNeo] text-sm sm:text-base w-full border border-[#50311D] px-3 py-2 rounded-md focus:outline-none"
           />
         </div>
       </div>
@@ -187,9 +187,9 @@
       <!-- 배달료 확인 -->
       <div>
         <div @click="toggleFeeSection">
-          <span class="font-[SpokaHanSansNeo] text-4 text-[#50311D] cursor-pointer">배달료 확인하기</span>
+          <span class="font-[SpokaHanSansNeo] text-sm sm:text-4 text-[#50311D] cursor-pointer">배달료 확인하기</span>
           <i
-            class="fas fa-chevron-right text-[15px] text-[#50311D] cursor-pointer ml-1 transition-transform duration-300"
+            class="fas fa-chevron-right text-sm sm:text-[15px] text-[#50311D] cursor-pointer ml-1 transition-transform duration-300"
             :class="isFeeOpen ? 'rotate-90' : 'rotate-0'"
           ></i>
         </div>
@@ -199,12 +199,12 @@
             <thead>
               <tr class="bg-[#BA8E5F]">
                 <th
-                  class="w-[50%] border-r border-gray-200 px-3 py-2 whitespace-nowrap text-[14px] text-white font-[SpokaHanSansNeo] font-normal"
+                  class="w-[50%] border-r border-gray-200 px-2 sm:px-3 py-2 whitespace-nowrap text-xs sm:text-[14px] text-white font-[SpokaHanSansNeo] font-normal"
                 >
                   배달 지역
                 </th>
                 <th
-                  class="w-[50%] px-3 py-2 whitespace-nowrap text-[14px] text-white font-[SpokaHanSansNeo] font-normal"
+                  class="w-[50%] px-2 sm:px-3 py-2 whitespace-nowrap text-xs sm:text-[14px] text-white font-[SpokaHanSansNeo] font-normal"
                 >
                   배달료
                 </th>
@@ -213,27 +213,27 @@
             <tbody>
               <tr class="border-b border-gray-200">
                 <td
-                  class="border-r border-gray-200 px-3 py-2 whitespace-nowrap text-[14px] text-gray-700 font-[SpokaHanSansNeo]"
+                  class="border-r border-gray-200 px-2 sm:px-3 py-2 whitespace-nowrap text-xs sm:text-[14px] text-gray-700 font-[SpokaHanSansNeo]"
                 >
                   주요 배달 지역
                 </td>
-                <td class="px-3 py-2 whitespace-nowrap text-[14px] text-gray-700 font-[SpokaHanSansNeo]">~5,400원</td>
+                <td class="px-2 sm:px-3 py-2 whitespace-nowrap text-xs sm:text-[14px] text-gray-700 font-[SpokaHanSansNeo]">~5,400원</td>
               </tr>
               <tr class="border-b border-gray-200">
                 <td
-                  class="border-r border-gray-200 px-3 py-2 whitespace-nowrap text-[14px] text-gray-700 font-[SpokaHanSansNeo]"
+                  class="border-r border-gray-200 px-2 sm:px-3 py-2 whitespace-nowrap text-xs sm:text-[14px] text-gray-700 font-[SpokaHanSansNeo]"
                 >
                   주요 배달 지역 외
                 </td>
-                <td class="px-3 py-2 whitespace-nowrap text-[14px] text-gray-700 font-[SpokaHanSansNeo]">+500원</td>
+                <td class="px-2 sm:px-3 py-2 whitespace-nowrap text-xs sm:text-[14px] text-gray-700 font-[SpokaHanSansNeo]">+500원</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="cursor-pointer mt-1" @click="toggleAgreeFee">
-          <i class="fa-solid fa-check mr-1" :class="isAgreeFee ? 'text-[#00ADD8]' : 'text-gray-400'"></i>
-          <span class="font-[SpokaHanSansNeo] text-[14px]" :class="isAgreeFee ? 'text-[#00ADD8]' : 'text-gray-400'">
+          <i class="fa-solid fa-check mr-1 text-sm sm:text-base" :class="isAgreeFee ? 'text-[#00ADD8]' : 'text-gray-400'"></i>
+          <span class="font-[SpokaHanSansNeo] text-xs sm:text-[14px]" :class="isAgreeFee ? 'text-[#00ADD8]' : 'text-gray-400'">
             배달료를 확인했으며 이에 동의합니다.
           </span>
         </div>
@@ -243,7 +243,7 @@
     <button
       type="button"
       @click="finishSignup"
-      class="w-full py-3 bg-[#50311D] text-white font-4 font-[SpokaHanSansNeo] cursor-pointer rounded-md transition-colors duration-200 mt-[50px]"
+      class="w-full py-2.5 sm:py-3 bg-[#50311D] text-white text-sm sm:text-base font-[SpokaHanSansNeo] cursor-pointer rounded-md transition-colors duration-200 mt-8 sm:mt-[50px]"
     >
       완료하기
     </button>
