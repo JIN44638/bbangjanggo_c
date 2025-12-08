@@ -39,7 +39,7 @@
       <div
         v-for="(day, index) in calendarDays"
         :key="index"
-        class="aspect-square bg-white relative cursor-pointer transition-colors"
+        class="h-17 bg-white relative cursor-pointer transition-colors"
         :class="{
           'border-r border-[#d9d9d9]': (index + 1) % 7 !== 0,
           'border-b border-[#d9d9d9]': index < calendarDays.length - 7,
