@@ -4,29 +4,29 @@
 
   <div class="space-y-3">
     <!-- 필터 영역 -->
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg shadow-xs px-7 py-4 text-sm">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xs px-7 py-4 text-sm">
       <div class="flex flex-wrap items-center gap-3">
         <!-- 문의일자 필터 -->
         <div class="flex items-center gap-2">
-          <label class="text-gray-700 dark:text-gray-300 whitespace-nowrap"
-            >문의일자</label
-          >
+          <label class="text-gray-700 dark:text-gray-300 whitespace-nowrap">문의일자</label>
           <input
             type="date"
             v-model="dateRange.start"
-            class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+            class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+          />
           <span class="text-gray-500 dark:text-gray-400">~</span>
           <input
             type="date"
             v-model="dateRange.end"
-            class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+            class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+          />
         </div>
 
         <!-- 문의유형 필터 -->
         <select
           v-model="typeFilter"
-          class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+          class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+        >
           <option value="all">전체 유형</option>
           <option value="픽업 문의">픽업 문의</option>
           <option value="보관 문의">보관 문의</option>
@@ -38,7 +38,8 @@
         <!-- 처리상태 필터 -->
         <select
           v-model="statusFilter"
-          class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+          class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+        >
           <option value="all">전체 상태</option>
           <option value="대기중">대기중</option>
           <option value="처리중">처리중</option>
@@ -48,7 +49,8 @@
         <!-- 답변여부 필터 -->
         <select
           v-model="answeredFilter"
-          class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+          class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+        >
           <option value="all">전체</option>
           <option value="answered">답변완료</option>
           <option value="unanswered">미답변</option>
@@ -58,7 +60,8 @@
         <div class="ml-auto flex items-center gap-2">
           <select
             v-model="sortOrder"
-            class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+            class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+          >
             <option value="latest">최신순</option>
             <option value="oldest">과거순</option>
           </select>
@@ -69,11 +72,8 @@
     <!-- 고객문의 목록 테이블 -->
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xs">
       <!-- 헤더 -->
-      <div
-        class="px-7 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
-          고객문의 관리
-        </h2>
+      <div class="px-7 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">고객문의 관리</h2>
 
         <div class="relative w-80">
           <input
@@ -81,7 +81,8 @@
             @input="handleInput"
             type="text"
             placeholder="고객명 또는 제목으로 검색하세요"
-            class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#A36031] focus:border-transparent" />
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#A36031] focus:border-transparent"
+          />
           <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
         </div>
       </div>
@@ -92,97 +93,91 @@
           <thead class="bg-gray-50 dark:bg-gray-700">
             <tr>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              >
                 문의유형
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              >
                 제목
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              >
                 고객명
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              >
                 연락처
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              >
                 문의일자
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              >
                 처리상태
               </th>
               <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+              >
                 답변여부
               </th>
             </tr>
           </thead>
-          <tbody
-            class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+          <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
             <tr
               v-for="item in paginatedData"
               :key="item.id"
               class="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors"
-              @click="handleRowClick(item)">
+              @click="handleRowClick(item)"
+            >
               <td class="px-6 py-4 whitespace-nowrap">
-                <span
-                  :class="getTypeClass(item.type)"
-                  class="px-2.5 py-1 rounded-md text-xs font-medium">
+                <span :class="getTypeClass(item.type)" class="px-2.5 py-1 rounded-md text-xs font-medium">
                   {{ item.type }}
                 </span>
               </td>
-              <td
-                class="px-6 py-4 text-sm text-gray-900 dark:text-white max-w-xs truncate"
-                :title="item.title">
+              <td class="px-6 py-4 text-sm text-gray-900 dark:text-white max-w-xs truncate" :title="item.title">
                 {{ item.title }}
               </td>
-              <td
-                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                 {{ item.customerName }}
               </td>
-              <td
-                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                 {{ item.phone }}
               </td>
-              <td
-                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                 {{ item.date }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <span
-                  :class="getStatusClass(item.status)"
-                  class="px-3 py-1 rounded-full text-xs font-medium">
+                <span :class="getStatusClass(item.status)" class="px-3 py-1 rounded-full text-xs font-medium">
                   {{ item.status }}
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center gap-2">
                   <span
-                    :class="
-                      item.answered
-                        ? 'text-green-600 dark:text-green-400'
-                        : 'text-red-500 dark:text-red-400'
-                    "
-                    class="font-semibold text-sm">
+                    :class="item.answered ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'"
+                    class="font-semibold text-sm"
+                  >
                     {{ item.answered ? "완료" : "미답변" }}
                   </span>
                   <button
                     v-if="!item.answered"
                     @click.stop="handleAnswerClick(item)"
-                    class="px-3 py-1 bg-[#E67E50] text-white text-xs rounded hover:bg-[#d46a3f] transition-colors">
+                    class="px-3 py-1 bg-[#E67E50] text-white text-xs rounded hover:bg-[#d46a3f] transition-colors"
+                  >
                     답변하기
                   </button>
                 </div>
               </td>
             </tr>
             <tr v-if="paginatedData.length === 0">
-              <td
-                colspan="7"
-                class="px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+              <td colspan="7" class="px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
                 문의 내역이 없습니다.
               </td>
             </tr>
@@ -191,13 +186,13 @@
       </div>
 
       <!-- 페이지네이션 -->
-      <div
-        class="flex justify-center items-center p-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex justify-center items-center p-4 border-t border-gray-200 dark:border-gray-700">
         <div class="flex gap-2">
           <button
             @click="prevPage"
             :disabled="currentPage === 1"
-            class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 dark:text-gray-300">
+            class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 dark:text-gray-300"
+          >
             <i class="fas fa-chevron-left"></i>
           </button>
 
@@ -210,14 +205,16 @@
                 ? 'bg-[#BA8E5F] text-white border-[#BA8E5F]'
                 : 'border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300',
               'px-3 py-1 border rounded',
-            ]">
+            ]"
+          >
             {{ page }}
           </button>
 
           <button
             @click="nextPage"
             :disabled="currentPage === totalPages"
-            class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 dark:text-gray-300">
+            class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 dark:text-gray-300"
+          >
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
@@ -229,17 +226,15 @@
 <script setup>
 import DashboardStats from "@/components/DashboardStats.vue";
 import { ref, computed, onMounted } from "vue";
-import { useRoute } from "vue-router"; 
+import { useRoute } from "vue-router";
 
-const route = useRoute(); 
+const route = useRoute();
 
 // 통계 카드 데이터 (computed로 실제 데이터 기반 계산)
 const inquiryStats = computed(() => {
   const total = inquiries.value.length;
   const unanswered = inquiries.value.filter((item) => !item.answered).length;
-  const processing = inquiries.value.filter(
-    (item) => item.status === "처리중"
-  ).length;
+  const processing = inquiries.value.filter((item) => item.status === "처리중").length;
   const answered = inquiries.value.filter((item) => item.answered).length;
 
   return [
@@ -340,13 +335,7 @@ const generateInquiryData = () => {
     "성지율",
   ];
 
-  const types = [
-    "픽업 문의",
-    "보관 문의",
-    "배송 문의",
-    "결제 문의",
-    "기타 문의",
-  ];
+  const types = ["픽업 문의", "보관 문의", "배송 문의", "결제 문의", "기타 문의"];
   const statuses = ["대기중", "처리중", "완료"];
   const questions = [
     "다른 보관소에서 수령할 수 있나요?",
@@ -430,10 +419,7 @@ const generateInquiryData = () => {
 
   // 나머지 문의 생성 (답변완료)
   for (let i = 5; i < 50; i++) {
-    const randomDate = new Date(
-      startDate.getTime() +
-        Math.random() * (endDate.getTime() - startDate.getTime())
-    );
+    const randomDate = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
     const type = types[Math.floor(Math.random() * types.length)];
     const status = statuses[Math.floor(Math.random() * statuses.length)];
 
@@ -442,11 +428,9 @@ const generateInquiryData = () => {
       type: type,
       title: questions[Math.floor(Math.random() * questions.length)],
       customerName: names[i],
-      phone: `010-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(
-        1000 + Math.random() * 9000
-      )}`,
+      phone: `010-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`,
       date: randomDate.toISOString().split("T")[0],
-      status: status,
+      status: "완료",
       answered: true,
     });
   }
@@ -474,18 +458,14 @@ const filteredData = computed(() => {
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
     result = result.filter(
-      (item) =>
-        item.customerName.toLowerCase().includes(query) ||
-        item.title.toLowerCase().includes(query)
+      (item) => item.customerName.toLowerCase().includes(query) || item.title.toLowerCase().includes(query)
     );
   }
 
   // 날짜 필터
   if (dateRange.value.start && dateRange.value.end) {
     result = result.filter((item) => {
-      return (
-        item.date >= dateRange.value.start && item.date <= dateRange.value.end
-      );
+      return item.date >= dateRange.value.start && item.date <= dateRange.value.end;
     });
   }
 
@@ -557,35 +537,23 @@ const displayPages = computed(() => {
 // 문의유형 색상
 const getTypeClass = (type) => {
   const colors = {
-    "픽업 문의":
-      "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300",
-    "보관 문의":
-      "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300",
-    "배송 문의":
-      "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-300",
-    "결제 문의":
-      "bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-300",
-    "기타 문의":
-      "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300",
+    "픽업 문의": "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300",
+    "보관 문의": "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300",
+    "배송 문의": "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-300",
+    "결제 문의": "bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-300",
+    "기타 문의": "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300",
   };
-  return (
-    colors[type] ||
-    "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300"
-  );
+  return colors[type] || "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300";
 };
 
 // 처리상태 색상
 const getStatusClass = (status) => {
   const colors = {
-    대기중:
-      "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300",
+    대기중: "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300",
     처리중: "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300",
     완료: "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300",
   };
-  return (
-    colors[status] ||
-    "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300"
-  );
+  return colors[status] || "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300";
 };
 
 // 페이지 이동
@@ -628,9 +596,7 @@ const showAllInquiries = () => {
   answeredFilter.value = "unanswered";
   currentPage.value = 1;
   setTimeout(() => {
-    const tableElement = document.querySelector(
-      ".bg-white.dark\\:bg-gray-800.rounded-lg.shadow-xs"
-    );
+    const tableElement = document.querySelector(".bg-white.dark\\:bg-gray-800.rounded-lg.shadow-xs");
     if (tableElement) {
       tableElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -642,12 +608,10 @@ const showAllInquiries = () => {
 onMounted(() => {
   if (route.query.filter === "unanswered") {
     answeredFilter.value = "unanswered";
-    
+
     // 테이블로 스크롤 이동
     setTimeout(() => {
-      const tableElement = document.querySelector(
-        ".bg-white.dark\\:bg-gray-800.rounded-lg.shadow-xs"
-      );
+      const tableElement = document.querySelector(".bg-white.dark\\:bg-gray-800.rounded-lg.shadow-xs");
       if (tableElement) {
         tableElement.scrollIntoView({ behavior: "smooth", block: "start" });
       }

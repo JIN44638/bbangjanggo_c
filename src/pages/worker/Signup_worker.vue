@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen w-full max-w-[768px] m-auto px-4 md:px-[85px] py-6 md:py-[85px]">
+  <div class="min-h-screen w-full max-w-[768px] m-auto p-[85px]">
     <h3 class="font-[Cafe24Surround] text-[30px] text-center text-[#50311D] mb-[50px]">회원 가입</h3>
 
     <form @submit.prevent="handleRegister" class="flex flex-col gap-[30px]">

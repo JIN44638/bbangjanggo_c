@@ -24,7 +24,7 @@
           <div>
             <button
               @click="closeSubMenu"
-              class="p-5 absolute right-[30px] text-[25px] cursor-pointer text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+              class="p-5 absolute right-[0px] text-[25px] cursor-pointer text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
             >
               <i class="fas fa-times"></i>
             </button>
