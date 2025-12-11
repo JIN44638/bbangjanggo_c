@@ -42,7 +42,7 @@
     <div class="grid grid-cols-2 gap-3 items-start">
       <!-- 일자별 매출 요약 필터 및 테이블 -->
       <div
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-xs px-7 pt-8 pb-8 text-sm flex flex-col gap-4"
+        class="bg-white h-[639px] dark:bg-gray-800 rounded-lg shadow-xs px-7 pt-8  text-sm flex flex-col gap-4"
         style="min-height: calc(100vh - 280px)"
       >
         <div class="flex items-center justify-between">
@@ -528,3 +528,17 @@ onMounted(() => {
   }
 });
 </script>
+<style scoped>
+/* 왼쪽 영역은 고정 높이를 설정 (최소 높이 설정) */
+.left-section {
+  min-height: 500px; /* 원하는 최소 높이 설정 */
+  height: 100%; /* 100% 높이를 채우되, 내용에 맞게 늘어나지 않음 */
+}
+
+/* 오른쪽 영역은 스크롤 가능 */
+.right-section {
+  overflow-y: auto; /* 스크롤이 가능하도록 설정 */
+  height: 100%; /* 오른쪽 영역의 높이는 부모 높이에 맞춰 확장 */
+}
+
+</style>
