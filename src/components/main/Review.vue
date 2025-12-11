@@ -39,13 +39,13 @@
             <swiper-slide v-for="review in reviews" :key="review.id">
               <div class="review-card">
                 <div class="review-image">
-                  <img :src="review.image" :alt="review.alt" loading="lazy" />
+                  <img :src="review.image" :alt="`${t('review.imageAlt')} ${review.id}`" loading="lazy" />
                 </div>
                 <div class="review-content">
                   <div class="review-rating">
                     <span v-for="star in review.rating" :key="star" class="star">★</span>
                   </div>
-                  <p class="review-text">{{ review.text }}</p>
+                  <p class="review-text">{{ t(review.textKey) }}</p>
                   <p class="review-author">{{ review.author }}</p>
                 </div>
               </div>
@@ -62,16 +62,13 @@
 
 <script setup>
 import { ref } from "vue";
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { useI18n } from "vue-i18n";
 
 const { locale, t } = useI18n();
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-// import required modules
 import { Autoplay, Navigation } from "swiper/modules";
 
 // 리뷰 데이터
@@ -79,49 +76,43 @@ const reviews = ref([
   {
     id: 1,
     image: "/images/pjs/review11.jpg",
-    alt: "리뷰 이미지 1",
+    textKey: "review.text1",
     rating: 5,
-    text: "빵지순례로 빵이 너무 많아 걱정했는데, 덕분에 편하게 다녔어요!",
     author: "apo****",
   },
   {
     id: 2,
     image: "/images/pjs/review12.jpg",
-    alt: "리뷰 이미지 2",
+    textKey: "review.text2",
     rating: 4,
-    text: "냉장보관도 가능해서 크림빵이 녹지 않아 좋았어요",
     author: "ros****",
   },
   {
     id: 3,
     image: "/images/pjs/review13.jpg",
-    alt: "리뷰 이미지 3",
+    textKey: "review.text3",
     rating: 5,
-    text: "보관소 덕분에 빵 터질 걱정 없이 쇼핑 제대로 했습니다ㅋㅋ",
     author: "liy****",
   },
   {
     id: 4,
     image: "/images/pjs/review14.PNG",
-    alt: "리뷰 이미지 4",
+    textKey: "review.text4",
     rating: 5,
-    text: "대구역 근처 보관소 이용했는데 깨끗했어요",
     author: "kim****",
   },
   {
     id: 5,
     image: "/images/pjs/review15.PNG",
-    alt: "리뷰 이미지 5",
+    textKey: "review.text5",
     rating: 4,
-    text: "여름이라 걱정했는데 냉장보관으로 빵이 눅눅해지지 않았어요.",
     author: "lee****",
   },
   {
     id: 6,
     image: "/images/pjs/review16.jpg",
-    alt: "리뷰 이미지 6",
+    textKey: "review.text6",
     rating: 5,
-    text: "예약하고 바로 QR 찍어서 맡길 수 있어서 간편했어요.",
     author: "park****",
   },
 ]);
