@@ -3,22 +3,24 @@
     <section id="visual" class="section"><Visual /></section>
     <FlowAd />
 
-      <section id="location" class="location">
-        <h1>지점 안내</h1>
-        <Location :showPins="true" />
-      </section>
-
+    <section id="location" class="location">
+      <h1 :class="{ 'font-ja': locale === 'ja' }">{{ t("location.title") }}</h1>
+      <Location :showPins="true" />
+    </section>
 
     <section id="howto" class="section"><Howto /></section>
-      <section id="price" class="section">
-        <Price />
-      </section>
+    <section id="price" class="section">
+      <Price />
+    </section>
     <section id="event" class="section"><Event /></section>
     <section id="review" class="section"><Review /></section>
     <section id="faq" class="section"><Faq /></section>
   </div>
 </template>
 <script setup>
+import { useI18n } from "vue-i18n";
+
+const { locale, t } = useI18n();
 import Location from "@/components/main/Location.vue";
 import Visual from "@/components/main/Visual.vue";
 import Howto from "@/components/main/Howto.vue";
@@ -40,6 +42,11 @@ import FlowAd from "@/components/FlowAd.vue";
     font-family: "Cafe24Surround";
     color: $point-color;
     padding-bottom: 50px;
+    font-weight: bold;
+    // 일본어일 때는 일본어를 지원하는 폰트 사용
+    &.font-ja {
+      font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    }
   }
   @media (max-width: 768px) {
     h1 {

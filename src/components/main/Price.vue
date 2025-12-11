@@ -1,58 +1,62 @@
 <template>
   <div class="price">
-    <h2>요금 안내</h2>
+    <h2 :class="{ 'font-ja': locale === 'ja' }">{{ t("price.title") }}</h2>
     <div class="inner p_inner">
       <div class="notice_wrap">
         <div class="notice">
-          <h3>직접 맡길게요</h3>
+          <h3>{{ t("price.pickup") }}</h3>
           <div class="info">
             <div class="box">
-              <p>냉장실</p>
-              <p>3000원</p>
+              <p>{{ t("price.refrigerated") }}</p>
+              <p>{{ t("price.pickupRefrigerated") }}</p>
             </div>
             <div class="box">
-              <p>상온</p>
-              <p>2500원</p>
+              <p>{{ t("price.roomTemp") }}</p>
+              <p>{{ t("price.pickupRoom") }}</p>
             </div>
             <div class="box">
-              <p>4시간 초과시</p>
-              <p>300원/10분당</p>
+              <p>{{ t("price.overtime") }}</p>
+              <p>{{ t("price.overtimeRate") }}</p>
             </div>
             <div class="box">
-              <p>최대보관시간</p>
-              <p>24시간</p>
+              <p>{{ t("price.maxTime") }}</p>
+              <p>{{ t("price.maxHours") }}</p>
             </div>
           </div>
         </div>
 
         <div class="notice">
-          <h3>기사님께 맡길게요</h3>
+          <h3>{{ t("price.delivery") }}</h3>
           <div class="info">
             <div class="box">
-              <p>냉장실</p>
-              <p>4,000원</p>
+              <p>{{ t("price.refrigerated") }}</p>
+              <p>{{ t("price.deliveryRefrigerated") }}</p>
             </div>
             <div class="box">
-              <p>상온</p>
-              <p>3,000원</p>
+              <p>{{ t("price.roomTemp") }}</p>
+              <p>{{ t("price.deliveryRoom") }}</p>
             </div>
             <div class="box">
-              <p>4시간 초과시</p>
-              <p>300원/10분당</p>
+              <p>{{ t("price.overtime") }}</p>
+              <p>{{ t("price.overtimeRate") }}</p>
             </div>
             <div class="box">
-              <p>최대보관시간</p>
-              <p>24시간</p>
+              <p>{{ t("price.maxTime") }}</p>
+              <p>{{ t("price.maxHours") }}</p>
             </div>
           </div>
         </div>
       </div>
-      <span>보냉백 (+1000) / 아이스팩 (+1,000) 별도</span>
+      <span :class="{ 'font-ja': locale === 'ja' }">{{ t("price.additional") }}</span>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useI18n } from "vue-i18n";
+
+const { locale, t } = useI18n();
+</script>
 <style lang="scss" scoped>
 @use "/src/assets/variables" as *;
 
@@ -68,12 +72,17 @@
     margin-bottom: 50px;
     color: #a36031;
     font-size: 32px;
-     @media (max-width: 768px) {
+    @media (max-width: 768px) {
       margin-bottom: 40px;
     }
     @media (max-width: 390px) {
       font-size: 20px;
-       margin-bottom: 30px;
+      margin-bottom: 30px;
+    }
+    font-weight: bold;
+    // 일본어일 때는 일본어를 지원하는 폰트 사용
+    &.font-ja {
+      font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     }
   }
   .notice_wrap {
@@ -86,11 +95,12 @@
 
     h3 {
       width: 100%;
-      border: solid #ba8e5f;
+      border: solid $point-color;
       border-radius: 15px 15px 0 0;
-      background-color: #ba8e5f;
+      background-color: $point-color;
       text-align: center;
       padding: 10px 0;
+      font-weight: bold;
       color: #fff8f8;
       @media (max-width: 390px) {
         font-size: 16px;
@@ -147,14 +157,11 @@
       font-weight: normal;
     }
   }
-}  
+}
 @media (max-width: 768px) {
   .price {
- 
-  padding-bottom: 40px;
-  padding-top: 40px;
-  
+    padding-bottom: 40px;
+    padding-top: 40px;
+  }
 }
-}
-
 </style>

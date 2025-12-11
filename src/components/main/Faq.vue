@@ -1,6 +1,6 @@
 <template>
   <div class="faq" id="faq">
-    <h3>FAQ/문의하기</h3>
+    <h3 :class="{ 'font-ja': locale === 'ja' }">{{ t("faq.title") }}</h3>
     <div class="inner faqinner">
       <div class="question">
         <ul class="faq-list">
@@ -16,8 +16,7 @@
                 opacity: openedIndex === index ? 1 : 0,
                 paddingTop: openedIndex === index ? '12px' : '0',
                 paddingBottom: openedIndex === index ? '12px' : '0',
-              }"
-            >
+              }">
               <div class="answer-content">
                 <p>{{ item.answer }}</p>
                 <p v-if="item.note" class="note">{{ item.note }}</p>
@@ -44,6 +43,9 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { locale, t } = useI18n();
 
 const faqs = [
   {
@@ -143,6 +145,11 @@ onMounted(async () => {
     color: $point-color;
     padding: 10px 0 50px;
     margin: 0;
+    font-weight: bold;
+    // 일본어일 때는 일본어를 지원하는 폰트 사용
+    &.font-ja {
+      font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    }
   }
   @media (max-width: 768px) {
     h3 {
@@ -210,7 +217,7 @@ onMounted(async () => {
           user-select: none;
 
           &:hover {
-            background-color:  rgb(228, 207, 166);
+            background-color: rgb(228, 207, 166);
           }
         }
         @media (max-width: 768px) {
@@ -243,7 +250,7 @@ onMounted(async () => {
               @media (max-width: 450px) {
                 line-height: 1.2;
               }
-            }  
+            }
 
             .note {
               margin-top: 8px;

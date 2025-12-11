@@ -1,7 +1,7 @@
 <template>
   <section class="event">
     <div class="inner">
-      <h3>프로모션</h3>
+      <h3 :class="{ 'font-ja': locale === 'ja' }">{{ t("promotion.title") }}</h3>
       <div class="event-swiper">
         <!-- Swiper 컴포넌트 -->
         <swiper
@@ -31,8 +31,7 @@
               slidesPerView: 3,
               spaceBetween: 10,
             },
-          }"
-        >
+          }">
           <swiper-slide>
             <img src="/images/pje/welcomeEvent.png" alt="slide" />
           </swiper-slide>
@@ -54,6 +53,9 @@
 <script setup>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
+import { useI18n } from "vue-i18n";
+
+const { locale, t } = useI18n();
 
 // Import Swiper styles
 import "swiper/css";
@@ -75,6 +77,11 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
     font-family: "Cafe24Surround";
     color: #fff;
     padding-bottom: 50px;
+    font-weight: bold;
+    // 일본어일 때는 일본어를 지원하는 폰트 사용
+    &.font-ja {
+      font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    }
   }
   @media (max-width: 768px) {
     h3 {
@@ -84,7 +91,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
   @media (max-width: 390px) {
     h3 {
       font-size: $f-a-q-text-font;
-       padding-bottom: 30px;
+      padding-bottom: 30px;
     }
   }
   img {

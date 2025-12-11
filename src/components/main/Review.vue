@@ -1,7 +1,7 @@
 <template>
   <section class="review">
     <div class="reviewinner">
-      <h3>리뷰</h3>
+      <h3 :class="{ 'font-ja': locale === 'ja' }">{{ t("review.title") }}</h3>
       <div class="review-container">
         <!-- 왼쪽 화살표 -->
         <div class="swiper-button-prev"></div>
@@ -35,8 +35,7 @@
                 slidesPerView: 5,
                 spaceBetween: 10,
               },
-            }"
-          >
+            }">
             <swiper-slide v-for="review in reviews" :key="review.id">
               <div class="review-card">
                 <div class="review-image">
@@ -65,6 +64,9 @@
 import { ref } from "vue";
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
+import { useI18n } from "vue-i18n";
+
+const { locale, t } = useI18n();
 
 // Import Swiper styles
 import "swiper/css";
@@ -160,6 +162,11 @@ const reviews = ref([
     font-family: "Cafe24Surround";
     color: $point-color;
     padding-bottom: 50px;
+    font-weight: bold;
+    // 일본어일 때는 일본어를 지원하는 폰트 사용
+    &.font-ja {
+      font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    }
   }
   @media (max-width: 768px) {
     h3 {
@@ -191,7 +198,6 @@ const reviews = ref([
   overflow: hidden;
   padding: 10px 5px 20px 5px;
 }
-
 
 .reviewSwiper {
   overflow: visible;

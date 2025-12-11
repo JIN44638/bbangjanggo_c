@@ -1,7 +1,7 @@
 <template>
   <div class="howto">
     <!-- 이용방법 -->
-    <h1>이용방법</h1>
+    <h1 :class="{ 'font-ja': locale === 'ja' }">{{ t("howto.title") }}</h1>
     <div class="inner">
       <!-- 웹 -->
       <div class="step1_2_3_4">
@@ -29,7 +29,11 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useI18n } from "vue-i18n";
+
+const { locale, t } = useI18n();
+</script>
 
 <style lang="scss" scoped>
 .howto {
@@ -44,8 +48,13 @@
     padding-top: 50px;
     padding-bottom: 50px;
     text-align: center;
-
+      font-weight: bold;
     color: #fff;
+      // 일본어일 때는 일본어를 지원하는 폰트 사용
+      &.font-ja {
+        font-family: "SpokaHanSansNeo", "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      }
   } // width: 1000px;
 }
 /* 기본: PC 이미지만 보이게 */
@@ -77,16 +86,15 @@
     display: none;
   } /* PC 이미지 숨김 */
   .howto h1 {
-      padding-top: 40px !important;
-      padding-bottom: 40px !important;
-    }
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
   .mobile {
     padding-bottom: 40px !important;
     .price {
       padding-top: 70px;
     }
 
-   
     img {
       width: 100%;
       // padding-bottom: 40px;
@@ -102,7 +110,7 @@
   .howto h1 {
     font-size: 20px;
     padding-top: 30px !important;
-    padding-bottom: 30px !important; 
+    padding-bottom: 30px !important;
   }
   .mobile {
     img {
