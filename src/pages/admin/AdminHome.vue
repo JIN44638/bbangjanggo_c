@@ -148,7 +148,7 @@ const currentDate = computed(() => {
 const isActive = (path) => route.path === path;
 
 // 로그아웃
-const logout = () => router.push("/admin");
+const logout = () => router.push("/loginworker");
 
 // 긴급 처리 사항
 const alerts = ref([

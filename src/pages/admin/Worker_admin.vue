@@ -183,7 +183,7 @@
                 <Badge :type="worker.vehicle" :label="worker.vehicle" />
               </td>
               <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 100px">
-                {{ worker.region }}
+                 <Badge :type="worker.region" :label="worker.region" />
               </td>
               <td class="px-5 py-3 text-sm text-gray-900 dark:text-white" style="min-width: 100px">
                 <Badge :type="worker.workStatus" :label="worker.workStatus" />
